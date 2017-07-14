@@ -1,4 +1,4 @@
-package org.group.isoft.bearsport.useractivity;
+package com.group.isoft.bearsport.useractivity;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
