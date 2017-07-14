@@ -41,5 +41,20 @@
 			<artifactId>group-isoft-bearsport-user</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-activity</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-useractivity</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-venues</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
