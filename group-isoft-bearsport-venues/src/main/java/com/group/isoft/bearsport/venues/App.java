@@ -1,4 +1,4 @@
-package org.group.isoft.bearsport.venues;
+package com.group.isoft.bearsport.venues;
 
 /**
  * Hello world!
