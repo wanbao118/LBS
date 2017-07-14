@@ -33,24 +33,13 @@
 			</list>
 		</property>
 	</bean>
-	<mvc:resources location="/" mapping="/**/*.js"/> 
-	<mvc:resources location="/" mapping="/**/*.css"/>  
-	<mvc:resources location="/" mapping="/**/*.html"/>  
-	<mvc:interceptors>
+<!-- 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
 			<mvc:mapping path="/activity/**" />
-			
-			<mvc:exclude-mapping path="/**/fonts/*" />
-			<mvc:exclude-mapping path="/**/*.css" />
-			<mvc:exclude-mapping path="/**/*.js" />
-			<mvc:exclude-mapping path="/**/*.png" />
-			<mvc:exclude-mapping path="/**/*.gif" />
-			<mvc:exclude-mapping path="/**/*.jpg" />
-			<mvc:exclude-mapping path="/**/*.jpeg" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+ -->
     <!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
