@@ -1,4 +1,4 @@
-package org.group.isoft.bearsport.activity;
+package com.group.isoft.bearsport.activity;
 
 /**
  * Hello world!
