@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group.isoft.bearsport.persist.user.UserMapper">
+	<resultMap id="userMap" type="com.group.isoft.bearsport.model.user.User">
+		<id property="id" column="ID" javaType="String" />
+		<result property="userId" column="USER_ID" javaType="String" />
+		<result property="nickName" column="NICK_NAME"
+			javaType="String" />
+		<result property="gender" column="GENDER"
+			javaType="String" />
+		<result property="language" column="LANGUAGE" javaType="String" />
+		<result property="city" column="CITY"
+			javaType="String" />
+		<result property="province" column="PROVINCE"
+			javaType="String" />
+		<result property="country" column="COUNTRY"
+			javaType="String" />
+		<result property="avatarUrl" column="AVATAR_URL"
+			javaType="String" />
+		<result property="description" column="DESCRIPTION"
+			javaType="String" />
+		<result property="level" column="LEVEL"
+			javaType="String" />
+		<result property="creditLevel" column="CREDIT_LEVEL"
+			javaType="String" />
+		<result property="favType1" column="FAVTYPE1"
+			javaType="String" />
+		<result property="favType2" column="FAVTYPE2"
+			javaType="String" />
+		<result property="favType3" column="FAVTYPE3"
+			javaType="String" />
+		<result property="firstLoginTime" column="FIRST_LOGIN_TIME"
+			javaType="java.sql.Timestamp" />
+		<result property="lastLoginTime" column="LAST_LOGIN_TIME"
+			javaType="java.sql.Timestamp" />
+		<result property="openId" column="OPEN_ID"
+			javaType="String" />
+			
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID AS id, USER_ID AS userId, NICK_NAME AS nickName,
+		GENDER AS gender, LANGUAGE AS language,
+		CITY AS city, PROVINCE AS province,
+		COUNTRY AS country, AVATAR_URL AS avatarUrl,
+		DESCRIPTION as description, LEVEL as level,
+		CREDIT_LEVEL as creditLevel, FAVTYPE1 as favType1,
+		FAVTYPE2 as favType2,FAVTYPE3 as favType3,
+		FIRST_LOGIN_TIME as firstLoginTime, LAST_LOGIN_TIME as lastLoginTime,
+		OPEN_ID as openId
+	</sql>
+
+	<insert id="addUser" parameterType="com.group.isoft.bearsport.model.user.User">
+		insert into t_user
+		(ID,USER_ID,NICK_NAME,GENDER,LANGUAGE,CITY,PROVINCE,COUNTRY,AVATAR_URL,DESCRIPTION,LEVEL,CREDIT_LEVEL,FAVTYPE1,
+		FAVTYPE2,FAVTYPE3,FIRST_LOGIN_TIME,LAST_LOGIN_TIME,OPEN_ID)
+		values
+		(#{id},#{userId},#{nickName},#{gender},#{language},#{city},#{province},#{country},#{avatarUrl},#{description},#{level}
+		,#{creditLevel},#{favType1},#{favType2},#{favType3},#{firstLoginTime},#{lastLoginTime},#{openId})
+	</insert>
+
+</mapper>

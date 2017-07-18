@@ -35,7 +35,7 @@
     <!-- reference mybatis config file，scan mapper dir -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="sampleDataSource"/>
-    <!-- 	<property name="mapperLocations" value="classpath:mappers/*.xml"/> -->
+    	<property name="mapperLocations" value="classpath:mappers/*.xml"/>
     </bean>
 
     <!-- spring and mybatis integration，scan dao package -->
