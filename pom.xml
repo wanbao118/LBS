@@ -14,9 +14,11 @@
 		<module>group-isoft-bearsport-persist</module>
 		<module>group-isoft-bearsport-common</module>
 		<module>group-isoft-bearsport-clientmodel</module>
-    <module>group-isoft-bearsport-web</module>
-    <module>group-isoft-bearsport-user</module>
-    <module>group-isoft-bearsport-activity</module>
+		<module>group-isoft-bearsport-web</module>
+		<module>group-isoft-bearsport-user</module>
+		<module>group-isoft-bearsport-activity</module>
+		<module>group-isoft-bearsport-useractivity</module>
+		<module>group-isoft-bearsport-venues</module>
   </modules>
 	<properties>
 		<!-- spring version -->
