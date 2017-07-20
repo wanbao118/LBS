@@ -36,7 +36,7 @@
 			javaType="java.sql.Timestamp" />
 		<result property="openId" column="OPEN_ID"
 			javaType="String" />
-			
+
 	</resultMap>
 	<sql id="Base_Column_List">
 		ID AS id, USER_ID AS userId, NICK_NAME AS nickName,
@@ -58,5 +58,17 @@
 		(#{id},#{userId},#{nickName},#{gender},#{language},#{city},#{province},#{country},#{avatarUrl},#{description},#{level}
 		,#{creditLevel},#{favType1},#{favType2},#{favType3},#{firstLoginTime},#{lastLoginTime},#{openId})
 	</insert>
+
+	<select id="fetchUserDetlByOpenId" parameterType="String"
+		resultType="com.group.isoft.bearsport.model.user.User">
+		select
+		<include refid="Base_Column_List" />
+		from t_user where OPEN_ID = #{openId}
+	</select>
+
+	<update id="updateUser" parameterType="com.group.isoft.bearsport.model.user.User">
+		update t_user SET
+		LEVEL = #{level}, CREDIT_LEVEL = #{creditLevel} where USER_ID = #{userId}
+	</update>
 
 </mapper>

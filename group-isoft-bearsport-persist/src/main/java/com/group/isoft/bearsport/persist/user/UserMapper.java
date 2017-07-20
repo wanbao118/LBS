@@ -13,6 +13,8 @@ public interface UserMapper
 
     User fetchUserDetlByUserId(String userId);
 
+    User fetchUserDetlByOpenId(String openId);
+
     List<User> queryUserByParams(User user);
 
     List<User> queryUserByParamsCount(User user);
