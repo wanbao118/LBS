@@ -4,5 +4,5 @@ import com.group.isoft.bearsport.clientmodel.user.UserReqModel;
 import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
 
 public interface IUserService {
-    UserRespModel addUser(UserReqModel userReqModel);
+    UserRespModel addUser(UserReqModel userReqModel) throws Exception;
 }
