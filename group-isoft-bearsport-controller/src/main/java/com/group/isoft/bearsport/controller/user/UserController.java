@@ -29,6 +29,7 @@ import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
 import com.group.isoft.bearsport.model.user.User;
 import com.group.isoft.bearsport.user.IUserService;
 import com.group.isoft.bearsport.util.Constant;
+import com.group.isoft.bearsport.util.ErrorCode;
 import com.group.isoft.bearsport.util.OperationCode;
 
 import net.sf.json.JSONException;
@@ -51,7 +52,7 @@ public class UserController {
 
 		try {
 			OauthInfo oauthInfo = null;
-			
+
 			oauthInfo = getOauthInfo(userRequest.getCode());
 
 			if (null != oauthInfo) {
@@ -59,7 +60,7 @@ public class UserController {
 				params.put("openId", oauthInfo.getOpenId());
 				userRespModel.setParams(params);
 
-				userRespModel.setResult("");
+				userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,7 +112,6 @@ public class UserController {
 		  HttpResponse response = httpClient.execute(httpGet);
 		  HttpEntity entity = response.getEntity();
 		  String responseStr =  EntityUtils.toString(entity, "UTF-8");
-		  System.out.println(responseStr);
 
 		  JSONObject jsonObject = JSONObject.fromObject(responseStr);
 
@@ -131,7 +131,7 @@ public class UserController {
 	        return oAuthInfo;
 	}
 
-	private UserRespModel addUser(@RequestBody UserReqModel userRequest) {
+	private UserRespModel addUser(@RequestBody UserReqModel userRequest) throws Exception {
 		return userService.addUser(userRequest);
 	}
 
