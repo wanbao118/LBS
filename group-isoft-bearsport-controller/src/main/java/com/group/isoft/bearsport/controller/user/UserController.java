@@ -91,8 +91,9 @@ public class UserController {
 		case OperationCode.DEL_USER:
 			userRespModel = deleteUser(userRequest);
 		}
-*/
+
 		}
+*/
 		return userRespModel;
 	}
 
