@@ -75,11 +75,14 @@ public class UserController {
 			@RequestBody UserReqModel userRequest) throws Exception {
 		UserRespModel userRespModel = new UserRespModel();
 
-		switch (userRequest.getOperationCode()) {
+		if (userRequest.getOperationCode().equals("AD")) {
+			userRespModel = addUser(userRequest);
+		}
+/*		switch (userRequest.getOperationCode()) {
 		case OperationCode.USER_CREATION:
 			userRespModel = addUser(userRequest);
 			break;
-/*		case OperationCode.FETCH_BY_USER_ID:
+		case OperationCode.FETCH_BY_USER_ID:
 			userRespModel = fetchUserDetlByUserId(userRequest);
 			break;
 		case OperationCode.UPDATE_USER:
