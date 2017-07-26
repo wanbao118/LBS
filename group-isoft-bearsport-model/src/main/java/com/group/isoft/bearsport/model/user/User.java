@@ -21,6 +21,9 @@ public class User {
 	private Timestamp firstLoginTime;
 	private Timestamp lastLoginTime;
 	private String openId;
+	private String latitude;
+	private String longitude;
+	private String loginCity;
 
 	public String getId() {
 		return id;
@@ -129,6 +132,24 @@ public class User {
 	}
 	public void setOpenId(String openId) {
 		this.openId = openId;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getLoginCity() {
+		return loginCity;
+	}
+	public void setLoginCity(String loginCity) {
+		this.loginCity = loginCity;
 	}
 
 }
