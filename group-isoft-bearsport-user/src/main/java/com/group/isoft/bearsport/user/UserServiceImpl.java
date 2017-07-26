@@ -88,4 +88,40 @@ public class UserServiceImpl implements IUserService{
 		return userResponseModel;
 	}
 
+	public UserRespModel fetchUserList(UserReqModel userReqModel) throws Exception {
+		UserRespModel userRespModel = new UserRespModel();
+		List<User> userList = new ArrayList<User>();
+		List<UserRespData> userRespDataList = new ArrayList<UserRespData>();
+		userList = userMapper.queryUserList();
+		
+		for (User user : userList) {
+			UserRespData userRespData = new UserRespData();
+			userRespData.setId(user.getId());
+			userRespData.setAvatarUrl(user.getAvatarUrl());
+			userRespData.setCity(user.getCity());
+			userRespData.setCountry(user.getCountry());
+			userRespData.setCreditLevel(user.getCreditLevel());
+			userRespData.setDescription(user.getDescription());
+			userRespData.setFavType1(user.getFavType1());
+			userRespData.setFavType2(user.getFavType2());
+			userRespData.setFavType3(user.getFavType3());
+			userRespData.setFirstLoginTime(user.getFirstLoginTime());
+			userRespData.setGender(user.getGender());
+			userRespData.setLanguage(user.getLanguage());
+			userRespData.setLastLoginTime(user.getLastLoginTime());
+			userRespData.setLevel(user.getLevel());
+			userRespData.setNickName(user.getNickName());
+			userRespData.setOpenId(user.getOpenId());
+			userRespData.setProvince(user.getProvince());
+			userRespData.setUserId(user.getUserId());
+
+			userRespDataList.add(userRespData);
+		}
+
+		userRespModel.setListData(userRespDataList);
+		userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+
+		return userRespModel;
+	}
+
 }
