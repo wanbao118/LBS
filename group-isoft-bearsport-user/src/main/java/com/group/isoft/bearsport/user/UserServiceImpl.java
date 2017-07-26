@@ -61,7 +61,10 @@ public class UserServiceImpl implements IUserService{
 			user.setFavType2("");
 			user.setFavType3("");
 			user.setFirstLoginTime(new Timestamp(System.currentTimeMillis()));
-	
+			user.setLongitude(userReqModel.getLocation().getLongitude());
+			user.setLatitude(userReqModel.getLocation().getLatitude());
+			user.setLoginCity(userReqModel.getLoginCity());
+
 			if (userMapper.addUser(user)) {
 				userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
 			} else {
