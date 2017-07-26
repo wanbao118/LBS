@@ -1,5 +1,6 @@
 package com.group.isoft.bearsport.clientmodel.user;
 
+import com.group.isoft.bearsport.clientmodel.location.Location;
 import com.group.isoft.bearsport.common.BaseClientReqModel;
 
 public class UserReqModel extends BaseClientReqModel {
@@ -12,6 +13,8 @@ public class UserReqModel extends BaseClientReqModel {
 	private String country;
 	private String avatarUrl;
 	private String openId;
+	private String loginCity;
+	private Location location;
 
 	public String getCode() {
 		return code;
@@ -83,5 +86,21 @@ public class UserReqModel extends BaseClientReqModel {
 
 	public void setOpenId(String openId) {
 		this.openId = openId;
+	}
+
+	public String getLoginCity() {
+		return loginCity;
+	}
+
+	public void setLoginCity(String loginCity) {
+		this.loginCity = loginCity;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }
