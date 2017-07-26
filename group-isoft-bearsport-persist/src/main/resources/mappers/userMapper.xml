@@ -36,6 +36,12 @@
 			javaType="java.sql.Timestamp" />
 		<result property="openId" column="OPEN_ID"
 			javaType="String" />
+		<result property="latitude" column="LATITUDE"
+			javaType="String" />
+		<result property="longitude" column="LONGTITUDE"
+			javaType="String" />
+		<result property="loginCity" column="LOGIN_CITY"
+			javaType="String" />
 
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -47,16 +53,16 @@
 		CREDIT_LEVEL as creditLevel, FAVTYPE1 as favType1,
 		FAVTYPE2 as favType2,FAVTYPE3 as favType3,
 		FIRST_LOGIN_TIME as firstLoginTime, LAST_LOGIN_TIME as lastLoginTime,
-		OPEN_ID as openId
+		OPEN_ID as openId,LATITUDE as latitude,LONGTITUDE as longitude,LOGIN_CITY as loginCity
 	</sql>
 
 	<insert id="addUser" parameterType="com.group.isoft.bearsport.model.user.User">
 		insert into t_user
 		(ID,USER_ID,NICK_NAME,GENDER,LANGUAGE,CITY,PROVINCE,COUNTRY,AVATAR_URL,DESCRIPTION,LEVEL,CREDIT_LEVEL,FAVTYPE1,
-		FAVTYPE2,FAVTYPE3,FIRST_LOGIN_TIME,LAST_LOGIN_TIME,OPEN_ID)
+		FAVTYPE2,FAVTYPE3,FIRST_LOGIN_TIME,LAST_LOGIN_TIME,OPEN_ID,LATITUDE,LONGTITUDE,LOGIN_CITY)
 		values
 		(#{id},#{userId},#{nickName},#{gender},#{language},#{city},#{province},#{country},#{avatarUrl},#{description},#{level}
-		,#{creditLevel},#{favType1},#{favType2},#{favType3},#{firstLoginTime},#{lastLoginTime},#{openId})
+		,#{creditLevel},#{favType1},#{favType2},#{favType3},#{firstLoginTime},#{lastLoginTime},#{openId},#{latitude},#{longitude},#{loginCity})
 	</insert>
 
 	<select id="fetchUserDetlByOpenId" parameterType="String"
