@@ -75,25 +75,12 @@ public class UserController {
 			@RequestBody UserReqModel userRequest) throws Exception {
 		UserRespModel userRespModel = new UserRespModel();
 
-		if (userRequest.getOperationCode().equals("AD")) {
+		if (userRequest.getOperationCode().equals(OperationCode.USER_CREATION)) {
 			userRespModel = addUser(userRequest);
-		}
-/*		switch (userRequest.getOperationCode()) {
-		case OperationCode.USER_CREATION:
-			userRespModel = addUser(userRequest);
-			break;
-		case OperationCode.FETCH_BY_USER_ID:
-			userRespModel = fetchUserDetlByUserId(userRequest);
-			break;
-		case OperationCode.UPDATE_USER:
-			userRespModel = updateUser(userRequest);		
-			break;
-		case OperationCode.DEL_USER:
-			userRespModel = deleteUser(userRequest);
+		} else if (userRequest.getOperationCode().equals(OperationCode.USER_FETCH)) {
+			userRespModel = fetchUserList(userRequest);
 		}
 
-		}
-*/
 		return userRespModel;
 	}
 
@@ -139,6 +126,9 @@ public class UserController {
 		return userService.addUser(userRequest);
 	}
 
+	private UserRespModel fetchUserList(@RequestBody UserReqModel userRequest) throws Exception {
+		return userService.fetchUserList(userRequest);
+	}
 /*	private User getUserInfo(OauthInfo oauthInfo) throws Exception {
 		  User user = new User();
 		//构造HttpClient的实例

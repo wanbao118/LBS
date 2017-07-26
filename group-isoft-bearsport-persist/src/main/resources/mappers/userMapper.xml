@@ -66,6 +66,13 @@
 		from t_user where OPEN_ID = #{openId}
 	</select>
 
+	<select id="queryUserList"
+		resultType="com.group.isoft.bearsport.model.user.User">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+	</select>
+
 	<update id="updateUser" parameterType="com.group.isoft.bearsport.model.user.User">
 		update t_user SET
 		LEVEL = #{level}, CREDIT_LEVEL = #{creditLevel} where USER_ID = #{userId}
