@@ -81,7 +81,7 @@
 
 	<update id="updateUser" parameterType="com.group.isoft.bearsport.model.user.User">
 		update t_user SET
-		LEVEL = #{level}, CREDIT_LEVEL = #{creditLevel} where USER_ID = #{userId}
+		LEVEL = #{level}, CREDIT_LEVEL = #{creditLevel} where OPEN_ID = #{openId}
 	</update>
 
 </mapper>
