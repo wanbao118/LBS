@@ -78,11 +78,30 @@ public class UserServiceImpl implements IUserService{
 	public UserRespModel fetchUserByOpenId(UserReqModel userReqModel) throws Exception {
 		UserRespModel userResponseModel = new UserRespModel();
 		User user = userMapper.fetchUserDetlByOpenId(userReqModel.getOpenId());
-		UserRespData userRespData = new UserRespData();
+
 		List<UserRespData> userDataList = new ArrayList<UserRespData>();
 
 		if (null != user) {
-			BeanUtils.copyProperties(user, userRespData);
+			UserRespData userRespData = new UserRespData();
+
+			userRespData.setId(user.getId());
+			userRespData.setAvatarUrl(user.getAvatarUrl());
+			userRespData.setCity(user.getCity());
+			userRespData.setCountry(user.getCountry());
+			userRespData.setCreditLevel(user.getCreditLevel());
+			userRespData.setDescription(user.getDescription());
+			userRespData.setFavType1(user.getFavType1());
+			userRespData.setFavType2(user.getFavType2());
+			userRespData.setFavType3(user.getFavType3());
+			userRespData.setFirstLoginTime(user.getFirstLoginTime());
+			userRespData.setGender(user.getGender());
+			userRespData.setLanguage(user.getLanguage());
+			userRespData.setLastLoginTime(user.getLastLoginTime());
+			userRespData.setLevel(user.getLevel());
+			userRespData.setNickName(user.getNickName());
+			userRespData.setOpenId(user.getOpenId());
+			userRespData.setProvince(user.getProvince());
+			userRespData.setUserId(user.getUserId());
 			userDataList.add(userRespData);
 
 			userResponseModel.setResult(ErrorCode.RESPONSE_SUCCESS);
