@@ -79,6 +79,8 @@ public class UserController {
 			userRespModel = addUser(userRequest);
 		} else if (userRequest.getOperationCode().equals(OperationCode.USER_FETCH)) {
 			userRespModel = fetchUserList(userRequest);
+		} else if (userRequest.getOperationCode().equals(OperationCode.USER_FETCH_OPEN_ID)) {
+			userRespModel = fetchUserByOpenId(userRequest);
 		}
 
 		return userRespModel;
@@ -128,6 +130,10 @@ public class UserController {
 
 	private UserRespModel fetchUserList(@RequestBody UserReqModel userRequest) throws Exception {
 		return userService.fetchUserList(userRequest);
+	}
+
+	private UserRespModel fetchUserByOpenId(@RequestBody UserReqModel userRequest) throws Exception {
+		return userService.fetchUserByOpenId(userRequest);
 	}
 /*	private User getUserInfo(OauthInfo oauthInfo) throws Exception {
 		  User user = new User();
