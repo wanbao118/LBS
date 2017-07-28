@@ -135,34 +135,5 @@ public class UserController {
 	private UserRespModel fetchUserByOpenId(@RequestBody UserReqModel userRequest) throws Exception {
 		return userService.fetchUserByOpenId(userRequest);
 	}
-/*	private User getUserInfo(OauthInfo oauthInfo) throws Exception {
-		  User user = new User();
-		//构造HttpClient的实例
-		  HttpClient httpClient = new DefaultHttpClient();
-
-
-		  List<NameValuePair> params = new ArrayList<NameValuePair>();
-		  params.add(new BasicNameValuePair("access_token", oauthInfo.getAccessToken()));
-		  params.add(new BasicNameValuePair("openid", oauthInfo.getOpenId()));
-		  params.add(new BasicNameValuePair("lang", "zh_CN"));
-
-		  String UserUrlParams = EntityUtils.toString(new UrlEncodedFormEntity(params, Consts.UTF_8));
-
-		  //创建GET方法的实例
-		  HttpGet httpGet = new HttpGet(Constant.USER_INFO_URL + "?" + UserUrlParams);
-
-		  HttpResponse response = httpClient.execute(httpGet);
-		  HttpEntity entity = response.getEntity();
-		  String responseStr =  EntityUtils.toString(entity, "UTF-8");
-		  System.out.println(responseStr);
-
-		  JSONObject jsonObject = JSONObject.fromObject(responseStr);
-
-		  if (jsonObject != null) {
-			  
-		  }
-		  return user;
-	}
-*/
 
 }
