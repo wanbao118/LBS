@@ -15,6 +15,7 @@ public class UserReqModel extends BaseClientReqModel {
 	private String openId;
 	private String loginCity;
 	private Location location;
+	private String description;
 
 	public String getCode() {
 		return code;
@@ -102,5 +103,13 @@ public class UserReqModel extends BaseClientReqModel {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
