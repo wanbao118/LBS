@@ -147,4 +147,20 @@ public class UserServiceImpl implements IUserService{
 		return userRespModel;
 	}
 
+	public UserRespModel updateUser(UserReqModel userReqModel) throws Exception {
+		User user = userMapper.fetchUserDetlByOpenId(userReqModel.getOpenId());
+		UserRespModel userRespModel = new UserRespModel();
+
+		user.setDescription(userReqModel.getDescription());
+		
+		int recordNum = userMapper.updateUser(user);
+
+		if (recordNum > 0) {
+			userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		} else {
+			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+		}	
+		return null;
+	}
+
 }
