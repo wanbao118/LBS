@@ -81,6 +81,8 @@ public class UserController {
 			userRespModel = fetchUserList(userRequest);
 		} else if (userRequest.getOperationCode().equals(OperationCode.USER_FETCH_OPEN_ID)) {
 			userRespModel = fetchUserByOpenId(userRequest);
+		} else if (userRequest.getOperationCode().equals(OperationCode.USER_UPDATE)) {
+			userRespModel = updateUserInfo(userRequest);
 		}
 
 		return userRespModel;
@@ -134,6 +136,10 @@ public class UserController {
 
 	private UserRespModel fetchUserByOpenId(@RequestBody UserReqModel userRequest) throws Exception {
 		return userService.fetchUserByOpenId(userRequest);
+	}
+
+	private UserRespModel updateUserInfo(@RequestBody UserReqModel userRequest) throws Exception {
+		return userService.updateUser(userRequest);
 	}
 
 }
