@@ -30,7 +30,7 @@ public class UserServiceImpl implements IUserService{
 		user = userMapper.fetchUserDetlByOpenId(userReqModel.getOpenId());
 
 		if (user != null) {
-			user = userMapper.fetchUserDetlByOpenId(userReqModel.getOpenId());
+			//user = userMapper.fetchUserDetlByOpenId(userReqModel.getOpenId());
 			user.setCreditLevel(String.valueOf(Integer.parseInt(user.getCreditLevel()) + 1));
 			user.setLevel(String.valueOf(Integer.parseInt(user.getLevel()) + 1));
 			user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
