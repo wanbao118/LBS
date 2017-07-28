@@ -7,4 +7,5 @@ public class OperationCode
     public static final String USER_DEL = "UD";
     public static final String USER_FETCH = "UF";
     public static final String USER_FETCH_OPEN_ID = "UFO";
+    public static final String USER_UPDATE = "UPD";
 }
