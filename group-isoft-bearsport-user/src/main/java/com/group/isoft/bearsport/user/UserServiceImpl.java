@@ -34,6 +34,8 @@ public class UserServiceImpl implements IUserService{
 			user.setCreditLevel(String.valueOf(Integer.parseInt(user.getCreditLevel()) + 1));
 			user.setLevel(String.valueOf(Integer.parseInt(user.getLevel()) + 1));
 			user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
+			user.setLatitude(userReqModel.getLocation().getLatitude());
+			user.setLongitude(userReqModel.getLocation().getLongitude());
 
 			int recordNum = userMapper.updateUser(user);
 

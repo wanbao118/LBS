@@ -16,11 +16,30 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-clientmodel</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>group.isoft.bearsports</groupId>
+			<artifactId>group-isoft-bearsport-persist</artifactId>
+			<version>${project.version}</version>
+		</dependency>
   </dependencies>
 </project>
