@@ -1,6 +1,5 @@
 package com.group.isoft.bearsport.clientmodel.venues;
 
-import com.group.isoft.bearsport.clientmodel.location.Location;
 import com.group.isoft.bearsport.common.BaseClientReqModel;
 
 public class VenuesReqModel extends BaseClientReqModel {
