@@ -58,4 +58,11 @@
 		values
 		(#{id},#{actId},#{actType},#{feeType},#{planPeople},#{sportType},#{actDate},#{actTime},#{userId},#{openId},#{heat},#{createDate},#{actStatus},#{fee},#{areaName},#{areaAddress},#{areaLatitude},#{areaLongitude},#{wordInput},#{actSubject})
 	</insert>
+		<select id="queryActivityList"
+		resultType="com.group.isoft.bearsport.model.activity.Activity">
+		select
+		<include refid="Base_Column_List" />
+		from t_activity
+	</select>
+
 </mapper>

@@ -1,7 +1,5 @@
 package com.group.isoft.bearsport.controller.activity;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.group.isoft.bearsport.activity.IActivityService;
 import com.group.isoft.bearsport.clientmodel.activity.ActivityReqModel;
 import com.group.isoft.bearsport.clientmodel.activity.ActivityRespModel;
+import com.group.isoft.bearsport.util.OperationCode;
 
 @Controller
 @RequestMapping("/activity")
@@ -25,20 +24,26 @@ public class ActivityController {
 	@Resource
 	IActivityService activityService;
 
-	@RequestMapping(value = "/createActivity", method = RequestMethod.POST, consumes = "application/json")
+	@RequestMapping(value = "/activityMaintain", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Object activityMaintain(final HttpServletRequest request, final HttpServletResponse response,
 			@RequestBody ActivityReqModel activityRequest) throws Exception {
 		ActivityRespModel activityRespModel = new ActivityRespModel();
 
-		if (activityRequest.getOperationCode().equals("CA")) {
+		if (activityRequest.getOperationCode().equals(OperationCode.ACT_CREATE)) {
 			activityRespModel = createActivity(activityRequest);
+		} else if (activityRequest.getOperationCode().equals(OperationCode.ACT_FETCH)) {
+			activityRespModel = getActivityList(activityRequest);
 		}
 		return activityRespModel;
 	}
 
 	private ActivityRespModel createActivity(@RequestBody ActivityReqModel activityRequest) throws Exception {
 		return activityService.createActivity(activityRequest);
+	}
+
+	private ActivityRespModel getActivityList(@RequestBody ActivityReqModel activityRequest) throws Exception {
+		return activityService.fetchActivity(activityRequest);
 	}
 
 }
