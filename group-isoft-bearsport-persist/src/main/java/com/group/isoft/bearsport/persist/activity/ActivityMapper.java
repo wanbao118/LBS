@@ -7,4 +7,5 @@ import com.group.isoft.bearsport.model.activity.Activity;
 public interface ActivityMapper {
 	 boolean addActivity(Activity activity);
 	 List<Activity> queryActivityList();
+	 String fetchMaxActId();
 }

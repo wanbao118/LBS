@@ -64,5 +64,7 @@
 		<include refid="Base_Column_List" />
 		from t_activity
 	</select>
-
+	<select id="fetchMaxActId" resultType="String">
+		select MAX(ACT_ID) as ACT_ID from t_activity
+	</select>
 </mapper>
