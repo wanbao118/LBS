@@ -84,5 +84,7 @@
 		LEVEL = #{level}, CREDIT_LEVEL = #{creditLevel}, LAST_LOGIN_TIME = #{lastLoginTime}, DESCRIPTION = #{description}, LATITUDE = #{latitude}
 		, LONGTITUDE = #{longitude} where OPEN_ID = #{openId}
 	</update>
-
+	<select id="fetchMaxUserId" resultType="String">
+		select MAX(USER_ID) as USER_ID from t_user
+	</select>
 </mapper>

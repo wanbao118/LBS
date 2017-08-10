@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.group.isoft.bearsport.clientmodel.user.UserReqModel;
@@ -45,9 +46,33 @@ public class UserServiceImpl implements IUserService{
 				userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 			}		
 		} else {
+			String userId = null;
+			String maxUserId = userMapper.fetchMaxUserId();
+
+			if(StringUtils.isBlank(maxUserId)){
+				maxUserId = "0";
+			}
+			
+			Integer newUserId = Integer.valueOf(maxUserId) + 1;
+
+			switch (newUserId.toString().length()) {
+			case 1:
+				userId = "000" + newUserId;
+				break;
+			case 2:
+				userId = "00" + newUserId;
+				break;
+			case 3:
+				userId = "0" + newUserId;
+				break;
+			case 4:
+				userId = "0" + newUserId;
+				break;
+			}
+
 			user = new User();
 			user.setId(Utils.getUUID());
-			user.setUserId("0001");
+			user.setUserId(userId);
 	
 			user.setAvatarUrl(userReqModel.getAvatarUrl());
 			user.setCity(userReqModel.getCity());
