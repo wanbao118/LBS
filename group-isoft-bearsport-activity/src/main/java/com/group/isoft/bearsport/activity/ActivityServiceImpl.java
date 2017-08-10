@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.group.isoft.bearsport.clientmodel.activity.ActivityReqModel;
@@ -27,9 +28,32 @@ public class ActivityServiceImpl implements IActivityService {
 
 		ActivityRespModel activityRespModel = new ActivityRespModel();
 		Activity activity = new Activity();
+		String actId = null;
+		String maxActId = activityMapper.fetchMaxActId();
+
+		if(StringUtils.isBlank(maxActId)){
+			maxActId="0";
+		}
+		
+		Integer newActId = Integer.valueOf(maxActId) + 1;
+
+		switch (newActId.toString().length()) {
+		case 1:
+			actId = "000" + newActId;
+			break;
+		case 2:
+			actId = "00" + newActId;
+			break;
+		case 3:
+			actId = "0" + newActId;
+			break;
+		case 4:
+			actId = "0" + newActId;
+			break;
+		}
 
 		activity.setId(Utils.getUUID());
-		activity.setActId("0001");
+		activity.setActId(actId);
 		activity.setActStatus("A");
 		activity.setActDate(activityReqModel.getActDate());
 		activity.setActSubject(activityReqModel.getActSubject());
