@@ -8,4 +8,5 @@ public interface ActivityMapper {
 	 boolean addActivity(Activity activity);
 	 List<Activity> queryActivityList();
 	 String fetchMaxActId();
+	 Activity fetchActDetlByActId(String actId);
 }
