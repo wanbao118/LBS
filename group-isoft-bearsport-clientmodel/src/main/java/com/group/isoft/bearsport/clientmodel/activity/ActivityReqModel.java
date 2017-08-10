@@ -19,6 +19,7 @@ public class ActivityReqModel extends BaseClientReqModel {
 	private Location areaLocation;
 	private String wordInput;
 	private String openId;
+	private String actId;
 
 	public String getActSubject() {
 		return actSubject;
@@ -97,6 +98,12 @@ public class ActivityReqModel extends BaseClientReqModel {
 	}
 	public void setOpenId(String openId) {
 		this.openId = openId;
+	}
+	public String getActId() {
+		return actId;
+	}
+	public void setActId(String actId) {
+		this.actId = actId;
 	}
 	
 }
