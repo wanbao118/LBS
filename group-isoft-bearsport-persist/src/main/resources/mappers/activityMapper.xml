@@ -67,4 +67,8 @@
 	<select id="fetchMaxActId" resultType="String">
 		select MAX(ACT_ID) as ACT_ID from t_activity
 	</select>
+
+	<select id="fetchActDetlByActId" parameterType="String" resultType="com.group.isoft.bearsport.model.activity.Activity">
+		select * from t_activity where ACT_ID = #{actId}
+	</select>
 </mapper>

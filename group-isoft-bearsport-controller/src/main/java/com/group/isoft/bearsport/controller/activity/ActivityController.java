@@ -34,6 +34,8 @@ public class ActivityController {
 			activityRespModel = createActivity(activityRequest);
 		} else if (activityRequest.getOperationCode().equals(OperationCode.ACT_FETCH)) {
 			activityRespModel = getActivityList(activityRequest);
+		} else if (activityRequest.getOperationCode().equals(OperationCode.ACT_FETCH_DETL)) {
+			activityRespModel = getActivityDetail(activityRequest);
 		}
 		return activityRespModel;
 	}
@@ -44,6 +46,10 @@ public class ActivityController {
 
 	private ActivityRespModel getActivityList(@RequestBody ActivityReqModel activityRequest) throws Exception {
 		return activityService.fetchActivity(activityRequest);
+	}
+
+	private ActivityRespModel getActivityDetail(@RequestBody ActivityReqModel activityRequest) throws Exception {
+		return activityService.fetchActivityDetl(activityRequest);
 	}
 
 }

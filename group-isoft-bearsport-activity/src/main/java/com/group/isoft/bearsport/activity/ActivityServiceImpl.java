@@ -116,4 +116,40 @@ public class ActivityServiceImpl implements IActivityService {
 		return activityRespModel;
 	}
 
+	public ActivityRespModel fetchActivityDetl(ActivityReqModel activityReqModel) throws Exception {
+		ActivityRespModel activityRespModel = new ActivityRespModel();
+		ActivityRespData activityRespData = new ActivityRespData();
+		List<ActivityRespData> activityRespDataList = new ArrayList<ActivityRespData>();
+		Activity activity = null;
+
+		activity = activityMapper.fetchActDetlByActId(activityReqModel.getActId());
+
+		if (null != activity) {
+			activityRespData.setActDate(activity.getActDate());
+			activityRespData.setActId(activity.getActId());
+			activityRespData.setActSubject(activity.getActSubject());
+			activityRespData.setActTime(activity.getActTime());
+			activityRespData.setActType(activity.getActType());
+			activityRespData.setAreaAddress(activity.getAreaAddress());
+			Location areaLocation = new Location();
+			areaLocation.setLatitude(activity.getAreaLatitude());
+			areaLocation.setLongitude(activity.getArealongitude());
+			activityRespData.setAreaLocation(areaLocation);
+			activityRespData.setAreaName(activity.getAreaName());
+			activityRespData.setEnrPeople(2);
+			activityRespData.setFeeEst(activity.getFee());
+			activityRespData.setFeeType(activity.getFeeType());
+			activityRespData.setOpenId(activity.getOpenId());
+			activityRespData.setPlanPeople(activity.getPlanPeople());
+			activityRespData.setSprType(activity.getSportType());
+			activityRespData.setWordsInput(activity.getWordInput());
+
+			activityRespDataList.add(activityRespData);
+			activityRespModel.setListData(activityRespDataList);
+		}
+
+		activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		return activityRespModel;
+	}
+
 }
