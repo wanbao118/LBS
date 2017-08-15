@@ -1,15 +1,16 @@
-package com.group.isoft.bearsport.model.useractivity;
+package com.group.isoft.bearsport.clientmodel.userActivity;
 
 import java.util.Date;
 
-public class UserActivity {
+import com.group.isoft.bearsport.common.BaseClientReqModel;
+
+public class UserActivityReqModel extends BaseClientReqModel {
 	private String actId;
 	private String userId;
-	private String joinerName;
 	private Date joinDate;
 	private String joinTime;
-	private int status;
-	private String detail;
+	private String joinRemark;
+	private String joinerName;
 
 	public String getActId() {
 		return actId;
@@ -23,12 +24,6 @@ public class UserActivity {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getJoinerName() {
-		return joinerName;
-	}
-	public void setJoinerName(String joinerName) {
-		this.joinerName = joinerName;
-	}
 	public Date getJoinDate() {
 		return joinDate;
 	}
@@ -41,17 +36,16 @@ public class UserActivity {
 	public void setJoinTime(String joinTime) {
 		this.joinTime = joinTime;
 	}
-	public int getStatus() {
-		return status;
+	public String getJoinRemark() {
+		return joinRemark;
 	}
-	public void setStatus(int status) {
-		this.status = status;
+	public void setJoinRemark(String joinRemark) {
+		this.joinRemark = joinRemark;
 	}
-	public String getDetail() {
-		return detail;
+	public String getJoinerName() {
+		return joinerName;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setJoinerName(String joinerName) {
+		this.joinerName = joinerName;
 	}
-	
 }
