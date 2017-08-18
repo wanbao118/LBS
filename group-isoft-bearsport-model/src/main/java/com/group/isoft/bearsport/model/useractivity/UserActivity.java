@@ -10,7 +10,11 @@ public class UserActivity {
 	private String joinTime;
 	private int status;
 	private String detail;
-
+	private Date cancelDate;
+	private String cancelTime;
+	private String cancelReason;
+	private String cancelRemark;
+	
 	public String getActId() {
 		return actId;
 	}
@@ -52,6 +56,30 @@ public class UserActivity {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public Date getCancelDate() {
+		return cancelDate;
+	}
+	public void setCancelDate(Date cancelDate) {
+		this.cancelDate = cancelDate;
+	}
+	public String getCancelTime() {
+		return cancelTime;
+	}
+	public void setCancelTime(String cancelTime) {
+		this.cancelTime = cancelTime;
+	}
+	public String getCancelReason() {
+		return cancelReason;
+	}
+	public void setCancelReason(String cancelReason) {
+		this.cancelReason = cancelReason;
+	}
+	public String getCancelRemark() {
+		return cancelRemark;
+	}
+	public void setCancelRemark(String cancelRemark) {
+		this.cancelRemark = cancelRemark;
 	}
 	
 }

@@ -32,9 +32,9 @@ public class ActivityServiceImpl implements IActivityService {
 		String maxActId = activityMapper.fetchMaxActId();
 
 		if(StringUtils.isBlank(maxActId)){
-			maxActId="0";
+			maxActId = "1";
 		}
-		
+
 		Integer newActId = Integer.valueOf(maxActId) + 1;
 
 		switch (newActId.toString().length()) {

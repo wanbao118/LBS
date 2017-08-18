@@ -30,9 +30,11 @@ public class UserActivityController {
 			@RequestBody UserActivityReqModel userActivityRequest) throws Exception {
 		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
 
-		if (userActivityRequest.getOperationCode().equals(OperationCode.ACTIVITY_APPLY)) {
+		if (userActivityRequest.getOperationCode().equalsIgnoreCase(OperationCode.ACTIVITY_APPLY)) {
 			userActivityRespModel = applyActivity(userActivityRequest);
-		} 
+		} else if (userActivityRequest.getOperationCode().equalsIgnoreCase(OperationCode.ACTIVITY_CANCEL)) {
+			userActivityRespModel = cancelActivity(userActivityRequest);
+		}
 
 		return userActivityRespModel;
 	}
@@ -40,5 +42,8 @@ public class UserActivityController {
 	private UserActivityRespModel applyActivity(UserActivityReqModel userActivityRequest) throws Exception {
 		return userActivityService.addUserActivity(userActivityRequest);
 	}
-	
+
+	private UserActivityRespModel cancelActivity(UserActivityReqModel userActivityRequest) throws Exception {
+		return userActivityService.deleteUserActivity(userActivityRequest);
+	}
 }

@@ -27,8 +27,12 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		userActivity.setJoinTime(userActivityReqModel.getJoinTime());
 		userActivity.setStatus(1);
 		userActivity.setUserId(userActivityReqModel.getUserId());
+		userActivity.setCancelDate(null);
+		userActivity.setCancelTime("");
+		userActivity.setCancelReason("");
+		userActivity.setCancelRemark("");
 
-		if ((userActivityMapper.fetchUserActivityByUidAndActId(userActivity)) > 0) {
+		if (null != userActivityMapper.fetchUserActivityByUidAndActId(userActivity.getActId(), userActivity.getUserId())) {
 			userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 		} else {
 			if (userActivityMapper.addUserActivity(userActivity)) {
@@ -36,6 +40,32 @@ public class UserActivityServiceImpl implements IUserActivityService {
 			} else {
 				userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 			}
+		}
+		return userActivityRespModel;
+	}
+
+	public UserActivityRespModel deleteUserActivity(UserActivityReqModel userActivityReqModel) throws Exception {
+		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
+		UserActivity userActivity ;
+
+		userActivity = userActivityMapper.fetchUserActivityByUidAndActId(
+				userActivityReqModel.getActId(), userActivityReqModel.getUserId());
+		
+		if (null != userActivity) {
+			userActivity.setCancelDate(userActivityReqModel.getCancelDate());
+			userActivity.setCancelReason(userActivityReqModel.getCancelReason());
+			userActivity.setCancelTime(userActivityReqModel.getCancelTime());
+			userActivity.setCancelRemark(userActivityReqModel.getCancelRemark());
+
+			int recordNum = userActivityMapper.updateUserActivity(userActivity);
+
+			if  (recordNum > 0) {
+				userActivityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+			} else {
+				userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+			}
+		} else {
+			userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 		}
 		return userActivityRespModel;
 	}
