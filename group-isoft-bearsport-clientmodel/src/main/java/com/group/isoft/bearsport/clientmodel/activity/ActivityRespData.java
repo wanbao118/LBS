@@ -20,6 +20,7 @@ public class ActivityRespData {
 	private String openId;
 	private String actId;
 	private int enrPeople;
+
 	public String getActSubject() {
 		return actSubject;
 	}
