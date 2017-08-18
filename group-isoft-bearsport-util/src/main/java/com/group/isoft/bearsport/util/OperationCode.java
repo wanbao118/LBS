@@ -13,4 +13,5 @@ public class OperationCode
     public static final String ACT_FETCH_DETL = "FAD";
 
     public static final String ACTIVITY_APPLY = "ACA";
+    public static final String ACTIVITY_CANCEL = "ACC";
 }
