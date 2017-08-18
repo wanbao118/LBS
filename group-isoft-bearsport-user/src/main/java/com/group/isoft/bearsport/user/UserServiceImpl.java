@@ -186,7 +186,6 @@ public class UserServiceImpl implements IUserService{
 		} else {
 			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 		}	
-		return null;
+		return userRespModel;
 	}
-
 }
