@@ -12,23 +12,41 @@
 		<result property="joinTime" column="JOIN_TIME" javaType="String" />
 		<result property="status" column="STATUS"
 			javaType="int" />
-		<result property="detail" column="DETAIL"
+		<result property="cancelDate" column="CANCEL_DATE"
+			javaType="java.sql.Date" />
+		<result property="cancelTime" column="CANCEL_TIME"
+			javaType="String" />
+		<result property="cancelReason" column="CANCEL_REASON"
+			javaType="String" />
+		<result property="cancelRemark" column="CANCEL_REMARK"
 			javaType="String" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		ACT_ID AS actId, USER_ID AS userId, JOINER_NAME AS joinerName,
-		JOIN_DATE AS joinDate, JOIN_TIME AS joinTime, STATUS AS status, DETAIL AS detail
+		JOIN_DATE AS joinDate, JOIN_TIME AS joinTime, STATUS AS status, DETAIL AS detail,
+		CANCEL_DATE AS cancelDate, CANCEL_TIME AS cancelTime, CANCEL_REASON AS cancelReason,
+		CANCEL_REMARK AS cancelRemark
 	</sql>
 
 	<insert id="addUserActivity" parameterType="com.group.isoft.bearsport.model.useractivity.UserActivity">
 		insert into t_useractivity
-		(ACT_ID,USER_ID,JOINER_NAME,JOIN_DATE,JOIN_TIME,STATUS,DETAIL)
+		(ACT_ID,USER_ID,JOINER_NAME,JOIN_DATE,JOIN_TIME,STATUS,DETAIL,CANCEL_DATE,CANCEL_TIME,CANCEL_REASON,CANCEL_REMARK)
 		values
-		(#{actId},#{userId},#{joinerName},#{joinDate},#{joinTime},#{status},#{detail})
+		(#{actId},#{userId},#{joinerName},#{joinDate},#{joinTime},#{status},#{detail},#{cancelDate},
+		#{cancelTime},#{cancelReason},#{cancelRemark})
 	</insert>
 
-	<select id="fetchUserActivityByUidAndActId" parameterType="com.group.isoft.bearsport.model.useractivity.UserActivity"
-		resultType="int">
-		select count(0) from t_useractivity where ACT_ID = #{actId} and USER_ID = #{userId}
+	<select id="fetchUserActivityByUidAndActId"
+		resultType="com.group.isoft.bearsport.model.useractivity.UserActivity">
+		select
+		<include refid="Base_Column_List" />
+		from t_useractivity where ACT_ID = #{0} and USER_ID = #{1}
 	</select>
+
+	<update id="updateUserActivity" parameterType="com.group.isoft.bearsport.model.useractivity.UserActivity">
+		update t_useractivity SET
+		CANCEL_DATE = #{cancelDate}, CANCEL_TIME = #{cancelTime}, CANCEL_REASON = #{cancelReason}, CANCEL_REMARK = #{cancelRemark}
+		where ACT_ID = #{actId} and USER_ID = #{userId}
+	</update>
+	
 </mapper>
