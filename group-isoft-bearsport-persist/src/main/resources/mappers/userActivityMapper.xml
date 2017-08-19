@@ -51,4 +51,25 @@
 		where ACT_ID = #{actId} and USER_ID = #{userId}
 	</update>
 	
+	<select id="getActivityJoinersbyAcctId" parameterType="String" resultMap="activityJoinerInfoResultMap">
+		select tu.USER_ID as userId, tu.NICK_NAME as username, tua.JOIN_DATE as joinDate, tua.JOIN_TIME as joinTime, tua.DETAIL as remark, ta.PLAN_PEOPLE as planPeople
+		from t_useractivity tua
+			left outer join t_user tu on tua.USER_ID = tu.USER_ID
+		    left outer join t_activity ta on tua.ACT_ID = ta.ACT_ID
+		where tua.ACT_ID = #{actId};
+	</select>
+	
+	<resultMap type="com.group.isoft.bearsport.model.useractivity.Joiner" id="joinersResultMap">
+		<id property="userId" column="userId"/>
+		<result property="username" column="username"/>
+		<result property="joinDate" column="joinDate"/>
+		<result property="joinTime" column="joinTime"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	
+	<resultMap type="com.group.isoft.bearsport.model.useractivity.ActivityJoinerInfo" id="activityJoinerInfoResultMap">
+		<result property="planPeople" column="planPeople"/>
+		<collection property="joiners" column="userId" ofType="com.group.isoft.bearsport.model.useractivity.Joiner" resultMap="joinersResultMap"/>
+	</resultMap>
+	
 </mapper>

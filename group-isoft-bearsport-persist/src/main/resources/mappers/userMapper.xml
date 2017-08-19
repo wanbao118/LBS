@@ -88,28 +88,4 @@
 		select MAX(USER_ID) as USER_ID from t_user
 	</select>
 	
-	<select id="getJoinerListbyAcctId" parameterType="String" resultType="com.group.isoft.bearsport.model.user.User">
-		select t.ID AS id, t.USER_ID AS userId, t.NICK_NAME AS nickName,
-		t.GENDER AS gender, t.LANGUAGE AS language,
-		t.CITY AS city, t.PROVINCE AS province,
-		t.COUNTRY AS country, t.AVATAR_URL AS avatarUrl,
-		t.DESCRIPTION as description, t.LEVEL as level,
-		t.CREDIT_LEVEL as creditLevel, t.FAVTYPE1 as favType1,
-		t.FAVTYPE2 as favType2,t.FAVTYPE3 as favType3,
-		t.FIRST_LOGIN_TIME as firstLoginTime, t.LAST_LOGIN_TIME as lastLoginTime,
-		t.OPEN_ID as openId,t.LATITUDE as latitude,t.LONGTITUDE as longitude,t.LOGIN_CITY as loginCity
-	 from
-     (select u.ID, u.USER_ID, u.NICK_NAME,
-		u.GENDER, u.LANGUAGE,
-		u.CITY, u.PROVINCE,
-		u.COUNTRY, u.AVATAR_URL,
-		u.DESCRIPTION, u.LEVEL,
-		u.CREDIT_LEVEL, u.FAVTYPE1,
-		u.FAVTYPE2,u.FAVTYPE3,
-		u.FIRST_LOGIN_TIME, u.LAST_LOGIN_TIME,
-		u.OPEN_ID,u.LATITUDE,u.LONGTITUDE,u.LOGIN_CITY, ua.ACT_ID, ua.JOINER_TYPE 
-        from
-        t_user u join t_useractivity ua on u.USER_ID = ua.USER_ID) as t where t.ACT_ID = #{actId}
-	</select>
-	
 </mapper>

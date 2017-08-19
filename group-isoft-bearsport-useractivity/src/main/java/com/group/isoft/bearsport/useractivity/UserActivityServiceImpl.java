@@ -7,13 +7,14 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.group.isoft.bearsport.clientmodel.user.UserRespData;
-import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
+import com.group.isoft.bearsport.clientmodel.userActivity.ActivityJoiner;
+import com.group.isoft.bearsport.clientmodel.userActivity.ActivityJoinerDetl;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityReqModel;
+import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespData;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespModel;
-import com.group.isoft.bearsport.model.user.User;
+import com.group.isoft.bearsport.model.useractivity.ActivityJoinerInfo;
+import com.group.isoft.bearsport.model.useractivity.Joiner;
 import com.group.isoft.bearsport.model.useractivity.UserActivity;
-import com.group.isoft.bearsport.persist.user.UserMapper;
 import com.group.isoft.bearsport.persist.userActivity.UserActivityMapper;
 import com.group.isoft.bearsport.util.ErrorCode;
 
@@ -23,9 +24,6 @@ public class UserActivityServiceImpl implements IUserActivityService {
 	@Resource
 	UserActivityMapper userActivityMapper;
 
-	@Resource
-	UserMapper userMapper;
-	
 	public UserActivityRespModel addUserActivity(UserActivityReqModel userActivityReqModel) throws Exception {
 		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
 		UserActivity userActivity = new UserActivity();
@@ -80,33 +78,33 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		return userActivityRespModel;
 	}
 
-	public UserRespModel getJoinerListbyAcctId(UserActivityReqModel userActivityReqModel) {
-		UserRespModel userRespModel = new UserRespModel();
-		ArrayList<User> userList = (ArrayList<User>) userMapper.getJoinerListbyAcctId(userActivityReqModel.getActId());
-		List<UserRespData> users = new ArrayList<UserRespData>();
-		for(User user : userList) {
-			UserRespData userRespData = new UserRespData();
-			userRespData.setAvatarUrl(user.getAvatarUrl());
-			userRespData.setCity(user.getCity());
-			userRespData.setCountry(user.getCountry());
-			userRespData.setCreditLevel(user.getCreditLevel());
-			userRespData.setDescription(user.getDescription());
-			userRespData.setFavType1(user.getFavType1());
-			userRespData.setFavType2(user.getFavType2());
-			userRespData.setFavType3(user.getFavType3());
-			userRespData.setFirstLoginTime(user.getFirstLoginTime());
-			userRespData.setGender(user.getGender());
-			userRespData.setId(user.getId());
-			userRespData.setLanguage(user.getLanguage());
-			userRespData.setLastLoginTime(user.getLastLoginTime());
-			userRespData.setLevel(user.getLevel());
-			userRespData.setNickName(user.getNickName());
-			userRespData.setOpenId(user.getOpenId());
-			userRespData.setProvince(user.getProvince());
-			userRespData.setUserId(user.getUserId());
-			users.add(userRespData);
+	@Override
+	public UserActivityRespModel getActivityJoinerInfo(UserActivityReqModel userActivityReqModel) throws Exception {
+		UserActivityRespModel respModel = new UserActivityRespModel();
+		ActivityJoinerInfo info = userActivityMapper.getActivityJoinersbyAcctId(userActivityReqModel.getActId());
+		ActivityJoinerDetl detail = new ActivityJoinerDetl();
+		detail.setEnrPeople(info.getJoiners().size());
+		detail.setPlanPeople(info.getPlanPeople());
+		ArrayList<Joiner> joiners = (ArrayList<Joiner>) info.getJoiners();
+		List<ActivityJoiner> actJoiners = new ArrayList<ActivityJoiner>();
+		for(Joiner joiner : joiners) {
+			ActivityJoiner actJoiner = new ActivityJoiner();
+			actJoiner.setUesrId(joiner.getUserId());
+			actJoiner.setUsername(joiner.getUsername());
+			actJoiner.setJoinDate(joiner.getJoinDate());
+			actJoiner.setJoinTime(joiner.getJoinTime());
+			actJoiner.setRemark(joiner.getRemark());
+			actJoiners.add(actJoiner);
 		}
-		userRespModel.setListData(users);
-		return userRespModel;
+		detail.setJoiners(actJoiners);
+		UserActivityRespData respData = new UserActivityRespData();
+		respData.setActivityJionerDetl(detail);
+		List<UserActivityRespData> data = new ArrayList<UserActivityRespData>();
+		data.add(respData);
+		respModel.setListData(data);
+		respModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		return respModel;
 	}
+
+	
 }

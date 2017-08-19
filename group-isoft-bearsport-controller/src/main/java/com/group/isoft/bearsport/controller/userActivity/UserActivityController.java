@@ -44,8 +44,8 @@ public class UserActivityController {
 	@ResponseBody
 	public Object getActivityJoiners(final HttpServletRequest request, final HttpServletResponse response,
 			@RequestBody UserActivityReqModel userActivityRequest) throws Exception{
-		UserRespModel userRespModel = getJoinerListbyAcctId(userActivityRequest);
-		return userRespModel;
+		UserActivityRespModel userActivityRespModel = getJoinerListbyAcctId(userActivityRequest);
+		return userActivityRespModel;
 	}
 	
 	private UserActivityRespModel applyActivity(UserActivityReqModel userActivityRequest) throws Exception {
@@ -56,7 +56,7 @@ public class UserActivityController {
 		return userActivityService.deleteUserActivity(userActivityRequest);
 	}
 	
-	private UserRespModel getJoinerListbyAcctId(UserActivityReqModel userActivityReqModel) throws Exception {
-		return userActivityService.getJoinerListbyAcctId(userActivityReqModel);
+	private UserActivityRespModel getJoinerListbyAcctId(UserActivityReqModel userActivityReqModel) throws Exception {
+		return userActivityService.getActivityJoinerInfo(userActivityReqModel);
 	}
 }
