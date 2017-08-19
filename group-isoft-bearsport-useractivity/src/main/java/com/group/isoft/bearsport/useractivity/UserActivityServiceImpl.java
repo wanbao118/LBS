@@ -1,11 +1,19 @@
 package com.group.isoft.bearsport.useractivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.group.isoft.bearsport.clientmodel.userActivity.ActivityJoiner;
+import com.group.isoft.bearsport.clientmodel.userActivity.ActivityJoinerDetl;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityReqModel;
+import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespData;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespModel;
+import com.group.isoft.bearsport.model.useractivity.ActivityJoinerInfo;
+import com.group.isoft.bearsport.model.useractivity.Joiner;
 import com.group.isoft.bearsport.model.useractivity.UserActivity;
 import com.group.isoft.bearsport.persist.userActivity.UserActivityMapper;
 import com.group.isoft.bearsport.util.ErrorCode;
@@ -70,4 +78,33 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		return userActivityRespModel;
 	}
 
+	@Override
+	public UserActivityRespModel getActivityJoinerInfo(UserActivityReqModel userActivityReqModel) throws Exception {
+		UserActivityRespModel respModel = new UserActivityRespModel();
+		ActivityJoinerInfo info = userActivityMapper.getActivityJoinersbyAcctId(userActivityReqModel.getActId());
+		ActivityJoinerDetl detail = new ActivityJoinerDetl();
+		detail.setEnrPeople(info.getJoiners().size());
+		detail.setPlanPeople(info.getPlanPeople());
+		ArrayList<Joiner> joiners = (ArrayList<Joiner>) info.getJoiners();
+		List<ActivityJoiner> actJoiners = new ArrayList<ActivityJoiner>();
+		for(Joiner joiner : joiners) {
+			ActivityJoiner actJoiner = new ActivityJoiner();
+			actJoiner.setUesrId(joiner.getUserId());
+			actJoiner.setUsername(joiner.getUsername());
+			actJoiner.setJoinDate(joiner.getJoinDate());
+			actJoiner.setJoinTime(joiner.getJoinTime());
+			actJoiner.setRemark(joiner.getRemark());
+			actJoiners.add(actJoiner);
+		}
+		detail.setJoiners(actJoiners);
+		UserActivityRespData respData = new UserActivityRespData();
+		respData.setActivityJionerDetl(detail);
+		List<UserActivityRespData> data = new ArrayList<UserActivityRespData>();
+		data.add(respData);
+		respModel.setListData(data);
+		respModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		return respModel;
+	}
+
+	
 }

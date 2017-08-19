@@ -11,6 +11,7 @@ public class UserActivityReqModel extends BaseClientReqModel {
 	private String joinTime;
 	private String joinRemark;
 	private String joinerName;
+	private String joinerType;
 	private Date cancelDate;
 	private String cancelTime;
 	private String cancelReason;
@@ -51,6 +52,12 @@ public class UserActivityReqModel extends BaseClientReqModel {
 	}
 	public void setJoinerName(String joinerName) {
 		this.joinerName = joinerName;
+	}
+	public String getJoinerType() {
+		return joinerType;
+	}
+	public void setJoinerType(String joinerType) {
+		this.joinerType = joinerType;
 	}
 	public Date getCancelDate() {
 		return cancelDate;

@@ -18,4 +18,5 @@ public interface UserMapper
     List<User> queryUserList();
 
     String fetchMaxUserId();
+    
 }

@@ -7,6 +7,8 @@
 		<result property="userId" column="USER_ID" javaType="String" />
 		<result property="joinerName" column="JOINER_NAME"
 			javaType="String" />
+		<result property="joinerType" column="JOINER_TYPE"
+		javaType="String" />
 		<result property="joinDate" column="JOIN_DATE"
 			javaType="java.sql.Date" />
 		<result property="joinTime" column="JOIN_TIME" javaType="String" />
@@ -22,7 +24,7 @@
 			javaType="String" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		ACT_ID AS actId, USER_ID AS userId, JOINER_NAME AS joinerName,
+		ACT_ID AS actId, USER_ID AS userId, JOINER_NAME AS joinerName, JOINER_TYPE AS joinerType,
 		JOIN_DATE AS joinDate, JOIN_TIME AS joinTime, STATUS AS status, DETAIL AS detail,
 		CANCEL_DATE AS cancelDate, CANCEL_TIME AS cancelTime, CANCEL_REASON AS cancelReason,
 		CANCEL_REMARK AS cancelRemark
@@ -30,9 +32,9 @@
 
 	<insert id="addUserActivity" parameterType="com.group.isoft.bearsport.model.useractivity.UserActivity">
 		insert into t_useractivity
-		(ACT_ID,USER_ID,JOINER_NAME,JOIN_DATE,JOIN_TIME,STATUS,DETAIL,CANCEL_DATE,CANCEL_TIME,CANCEL_REASON,CANCEL_REMARK)
+		(ACT_ID,USER_ID,JOINER_NAME,JOINER_TYPE,JOIN_DATE,JOIN_TIME,STATUS,DETAIL,CANCEL_DATE,CANCEL_TIME,CANCEL_REASON,CANCEL_REMARK)
 		values
-		(#{actId},#{userId},#{joinerName},#{joinDate},#{joinTime},#{status},#{detail},#{cancelDate},
+		(#{actId},#{userId},#{joinerName},#{joinerType},#{joinDate},#{joinTime},#{status},#{detail},#{cancelDate},
 		#{cancelTime},#{cancelReason},#{cancelRemark})
 	</insert>
 
@@ -48,5 +50,26 @@
 		CANCEL_DATE = #{cancelDate}, CANCEL_TIME = #{cancelTime}, CANCEL_REASON = #{cancelReason}, CANCEL_REMARK = #{cancelRemark}
 		where ACT_ID = #{actId} and USER_ID = #{userId}
 	</update>
+	
+	<select id="getActivityJoinersbyAcctId" parameterType="String" resultMap="activityJoinerInfoResultMap">
+		select tu.USER_ID as userId, tu.NICK_NAME as username, tua.JOIN_DATE as joinDate, tua.JOIN_TIME as joinTime, tua.DETAIL as remark, ta.PLAN_PEOPLE as planPeople
+		from t_useractivity tua
+			left outer join t_user tu on tua.USER_ID = tu.USER_ID
+		    left outer join t_activity ta on tua.ACT_ID = ta.ACT_ID
+		where tua.ACT_ID = #{actId};
+	</select>
+	
+	<resultMap type="com.group.isoft.bearsport.model.useractivity.Joiner" id="joinersResultMap">
+		<id property="userId" column="userId"/>
+		<result property="username" column="username"/>
+		<result property="joinDate" column="joinDate"/>
+		<result property="joinTime" column="joinTime"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	
+	<resultMap type="com.group.isoft.bearsport.model.useractivity.ActivityJoinerInfo" id="activityJoinerInfoResultMap">
+		<result property="planPeople" column="planPeople"/>
+		<collection property="joiners" column="userId" ofType="com.group.isoft.bearsport.model.useractivity.Joiner" resultMap="joinersResultMap"/>
+	</resultMap>
 	
 </mapper>

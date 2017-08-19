@@ -87,4 +87,5 @@
 	<select id="fetchMaxUserId" resultType="String">
 		select MAX(USER_ID) as USER_ID from t_user
 	</select>
+	
 </mapper>
