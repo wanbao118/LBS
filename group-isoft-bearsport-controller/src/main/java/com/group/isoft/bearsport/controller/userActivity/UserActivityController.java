@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityReqModel;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespModel;
 import com.group.isoft.bearsport.useractivity.IUserActivityService;
@@ -39,11 +40,23 @@ public class UserActivityController {
 		return userActivityRespModel;
 	}
 
+	@RequestMapping(value="/getActivityJoiners", method=RequestMethod.POST, consumes="application/json")
+	@ResponseBody
+	public Object getActivityJoiners(final HttpServletRequest request, final HttpServletResponse response,
+			@RequestBody UserActivityReqModel userActivityRequest) throws Exception{
+		UserRespModel userRespModel = getJoinerListbyAcctId(userActivityRequest);
+		return userRespModel;
+	}
+	
 	private UserActivityRespModel applyActivity(UserActivityReqModel userActivityRequest) throws Exception {
 		return userActivityService.addUserActivity(userActivityRequest);
 	}
 
 	private UserActivityRespModel cancelActivity(UserActivityReqModel userActivityRequest) throws Exception {
 		return userActivityService.deleteUserActivity(userActivityRequest);
+	}
+	
+	private UserRespModel getJoinerListbyAcctId(UserActivityReqModel userActivityReqModel) throws Exception {
+		return userActivityService.getJoinerListbyAcctId(userActivityReqModel);
 	}
 }

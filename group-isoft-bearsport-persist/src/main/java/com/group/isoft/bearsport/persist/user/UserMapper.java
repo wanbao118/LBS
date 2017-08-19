@@ -18,4 +18,6 @@ public interface UserMapper
     List<User> queryUserList();
 
     String fetchMaxUserId();
+    
+    List<User> getJoinerListbyAcctId(String actId);
 }

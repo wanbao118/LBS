@@ -6,6 +6,7 @@ public class UserActivity {
 	private String actId;
 	private String userId;
 	private String joinerName;
+	private String joinerType;
 	private Date joinDate;
 	private String joinTime;
 	private int status;
@@ -32,6 +33,12 @@ public class UserActivity {
 	}
 	public void setJoinerName(String joinerName) {
 		this.joinerName = joinerName;
+	}
+	public String getJoinerType() {
+		return joinerType;
+	}
+	public void setJoinerType(String joinerType) {
+		this.joinerType = joinerType;
 	}
 	public Date getJoinDate() {
 		return joinDate;
