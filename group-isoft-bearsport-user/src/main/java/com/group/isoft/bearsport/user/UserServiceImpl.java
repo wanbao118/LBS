@@ -43,6 +43,9 @@ public class UserServiceImpl implements IUserService{
 			user.setLanguage(userReqModel.getLanguage());
 			user.setNickName(userReqModel.getNickName());
 			user.setProvince(userReqModel.getProvince());
+			user.setDescription(userReqModel.getDescription());
+			user.setLoginCity(userReqModel.getLoginCity());
+
 			int recordNum = userMapper.updateUser(user);
 
 			if (recordNum > 0) {
