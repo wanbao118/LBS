@@ -2,7 +2,9 @@ package com.group.isoft.bearsport.activity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -74,6 +76,10 @@ public class ActivityServiceImpl implements IActivityService {
 		activity.setWordInput(activityReqModel.getWordInput());
 
 		if (activityMapper.addActivity(activity)) {
+			Map<String, String> paramMap = new HashMap<String, String>();
+			paramMap.put("actId", activity.getActId());
+			paramMap.put("userId", activity.getUserId());
+			activityRespModel.setParams(paramMap);
 			activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
 		} else {
 			activityRespModel.setResult(ErrorCode.RESPONSE_ERROR);

@@ -14,6 +14,8 @@
 		<result property="joinTime" column="JOIN_TIME" javaType="String" />
 		<result property="status" column="STATUS"
 			javaType="int" />
+		<result property="detail" column="DETAIL"
+			javaType="int" />		
 		<result property="cancelDate" column="CANCEL_DATE"
 			javaType="java.sql.Date" />
 		<result property="cancelTime" column="CANCEL_TIME"
@@ -42,7 +44,7 @@
 		resultType="com.group.isoft.bearsport.model.useractivity.UserActivity">
 		select
 		<include refid="Base_Column_List" />
-		from t_useractivity where ACT_ID = #{0} and USER_ID = #{1}
+		from t_useractivity where ACT_ID = #{actId} and USER_ID = #{userId}
 	</select>
 
 	<update id="updateUserActivity" parameterType="com.group.isoft.bearsport.model.useractivity.UserActivity">
@@ -58,7 +60,7 @@
 		    left outer join t_activity ta on tua.ACT_ID = ta.ACT_ID
 		where tua.ACT_ID = #{actId};
 	</select>
-	
+
 	<resultMap type="com.group.isoft.bearsport.model.useractivity.Joiner" id="joinersResultMap">
 		<id property="userId" column="userId"/>
 		<result property="username" column="username"/>

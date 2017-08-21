@@ -33,6 +33,7 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		userActivity.setJoinDate(userActivityReqModel.getJoinDate());
 		userActivity.setJoinerName(userActivityReqModel.getJoinerName());
 		userActivity.setJoinTime(userActivityReqModel.getJoinTime());
+		userActivity.setJoinerType(userActivityReqModel.getJoinerType());
 		userActivity.setStatus(1);
 		userActivity.setUserId(userActivityReqModel.getUserId());
 		userActivity.setCancelDate(null);
@@ -78,7 +79,6 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		return userActivityRespModel;
 	}
 
-	@Override
 	public UserActivityRespModel getActivityJoinerInfo(UserActivityReqModel userActivityReqModel) throws Exception {
 		UserActivityRespModel respModel = new UserActivityRespModel();
 		ActivityJoinerInfo info = userActivityMapper.getActivityJoinersbyAcctId(userActivityReqModel.getActId());
