@@ -20,6 +20,8 @@ public class ActivityReqModel extends BaseClientReqModel {
 	private String wordInput;
 	private String openId;
 	private String actId;
+	private String nickName;
+	private String contactNum;
 
 	public String getActSubject() {
 		return actSubject;
@@ -101,6 +103,18 @@ public class ActivityReqModel extends BaseClientReqModel {
 	}
 	public String getActId() {
 		return actId;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getContactNum() {
+		return contactNum;
+	}
+	public void setContactNum(String contactNum) {
+		this.contactNum = contactNum;
 	}
 	public void setActId(String actId) {
 		this.actId = actId;
