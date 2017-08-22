@@ -62,8 +62,12 @@ public class ActivityServiceImpl implements IActivityService {
 		activity.setActTime(activityReqModel.getActTime());
 		activity.setActType(activityReqModel.getActType());
 		activity.setAreaAddress(activityReqModel.getAreaAddress());
-		activity.setAreaLatitude(activityReqModel.getAreaLocation().getLatitude());
-		activity.setArealongitude(activityReqModel.getAreaLocation().getLongitude());
+
+		if (null != activityReqModel.getAreaLocation()) {
+			activity.setAreaLatitude(activityReqModel.getAreaLocation().getLatitude());
+			activity.setArealongitude(activityReqModel.getAreaLocation().getLongitude());
+		}
+
 		activity.setAreaName(activityReqModel.getAreaName());
 		activity.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		activity.setFee(activityReqModel.getFeeEst());
