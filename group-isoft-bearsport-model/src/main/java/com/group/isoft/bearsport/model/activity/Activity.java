@@ -24,6 +24,8 @@ public class Activity {
 	private String areaLongitude;
 	private String wordInput;
 	private String actSubject;
+	private String nickName;
+	private String contactNum;
 
 	public String getId() {
 		return id;
@@ -105,6 +107,24 @@ public class Activity {
 	}
 	public double getFee() {
 		return fee;
+	}
+	public String getAreaLongitude() {
+		return areaLongitude;
+	}
+	public void setAreaLongitude(String areaLongitude) {
+		this.areaLongitude = areaLongitude;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getContactNum() {
+		return contactNum;
+	}
+	public void setContactNum(String contactNum) {
+		this.contactNum = contactNum;
 	}
 	public void setFee(double fee) {
 		this.fee = fee;

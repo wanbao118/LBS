@@ -63,8 +63,8 @@ public class ActivityController {
 			userActivityReqModel.setJoinDate(new Date());
 
 			//add field in the DB and pass from FE
-			userActivityReqModel.setJoinerName("");
-			userActivityReqModel.setJoinTime("");
+			userActivityReqModel.setJoinerName(activityRequest.getNickName());
+			userActivityReqModel.setJoinTime(new Date().getHours() + ":" + new Date().getMinutes());
 			userActivityReqModel.setJoinerType("0");
 			userActivityReqModel.setJoinRemark(activityRequest.getWordInput());
 			userActivityRespModel = userActivityService.addUserActivity(userActivityReqModel);
