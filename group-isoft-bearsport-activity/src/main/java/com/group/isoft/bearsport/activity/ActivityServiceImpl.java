@@ -74,6 +74,8 @@ public class ActivityServiceImpl implements IActivityService {
 		activity.setPlanPeople(activityReqModel.getPlanPeople());
 		activity.setSportType(activityReqModel.getSprType());
 		activity.setWordInput(activityReqModel.getWordInput());
+		activity.setNickName(activityReqModel.getNickName());
+		activity.setContactNum(activityReqModel.getContactNum());
 
 		if (activityMapper.addActivity(activity)) {
 			Map<String, String> paramMap = new HashMap<String, String>();
