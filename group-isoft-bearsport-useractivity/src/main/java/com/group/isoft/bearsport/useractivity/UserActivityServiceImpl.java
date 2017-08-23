@@ -81,28 +81,30 @@ public class UserActivityServiceImpl implements IUserActivityService {
 
 	public UserActivityRespModel getActivityJoinerInfo(UserActivityReqModel userActivityReqModel) throws Exception {
 		UserActivityRespModel respModel = new UserActivityRespModel();
-		ActivityJoinerInfo info = userActivityMapper.getActivityJoinersbyAcctId(userActivityReqModel.getActId());
-		ActivityJoinerDetl detail = new ActivityJoinerDetl();
+		List<UserActivity> userActivityList = userActivityMapper.getUserActivityDetlByActId(userActivityReqModel.getActId());
+
+		List<UserActivityRespData> userActivityRespDataList = new ArrayList<UserActivityRespData>();
+/*				ActivityJoinerDetl detail = new ActivityJoinerDetl();
 		detail.setEnrPeople(info.getJoiners().size());
 		detail.setPlanPeople(info.getPlanPeople());
+		UserActivityRespData userActivityRespData = new UserActivityRespData();
+		
 		ArrayList<Joiner> joiners = (ArrayList<Joiner>) info.getJoiners();
 		List<ActivityJoiner> actJoiners = new ArrayList<ActivityJoiner>();
-		for(Joiner joiner : joiners) {
-			ActivityJoiner actJoiner = new ActivityJoiner();
-			actJoiner.setUesrId(joiner.getUserId());
-			actJoiner.setUsername(joiner.getUsername());
-			actJoiner.setJoinDate(joiner.getJoinDate());
-			actJoiner.setJoinTime(joiner.getJoinTime());
-			actJoiner.setRemark(joiner.getRemark());
-			actJoiners.add(actJoiner);
+*/
+		for(UserActivity userActivity : userActivityList) {
+			UserActivityRespData userActivityRespData = new UserActivityRespData();
+			userActivityRespData.setUesrId(userActivity.getUserId());
+			userActivityRespData.setUsername(userActivity.getJoinerName());
+			userActivityRespData.setJoinDate(userActivity.getJoinDate());
+			userActivityRespData.setJoinTime(userActivity.getJoinTime());
+			userActivityRespData.setRemark(userActivity.getDetail());
+			userActivityRespDataList.add(userActivityRespData);
 		}
-		detail.setJoiners(actJoiners);
-		UserActivityRespData respData = new UserActivityRespData();
-		respData.setActivityJionerDetl(detail);
-		List<UserActivityRespData> data = new ArrayList<UserActivityRespData>();
-		data.add(respData);
-		respModel.setListData(data);
+
+		respModel.setListData(userActivityRespDataList);
 		respModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+
 		return respModel;
 	}
 

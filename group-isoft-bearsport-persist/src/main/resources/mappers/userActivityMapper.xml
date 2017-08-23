@@ -61,6 +61,13 @@
 		where tua.ACT_ID = #{actId};
 	</select>
 
+	<select id="getUserActivityDetlByActId" parameterType="String"
+		resultType="com.group.isoft.bearsport.model.useractivity.UserActivity">
+		select
+		<include refid="Base_Column_List" />
+		from t_useractivity where ACT_ID = #{actId}
+	</select>
+
 	<resultMap type="com.group.isoft.bearsport.model.useractivity.Joiner" id="joinersResultMap">
 		<id property="userId" column="userId"/>
 		<result property="username" column="username"/>

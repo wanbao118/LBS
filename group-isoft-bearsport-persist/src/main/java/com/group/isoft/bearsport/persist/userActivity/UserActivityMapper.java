@@ -1,5 +1,7 @@
 package com.group.isoft.bearsport.persist.userActivity;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.group.isoft.bearsport.model.useractivity.ActivityJoinerInfo;
@@ -10,4 +12,5 @@ public interface UserActivityMapper {
 	UserActivity fetchUserActivityByUidAndActId(@Param("actId")String actId, @Param("userId")String userId);
 	int updateUserActivity(UserActivity userActivity);
 	ActivityJoinerInfo getActivityJoinersbyAcctId(String actId);
+	List<UserActivity> getUserActivityDetlByActId(String actId);
 }
