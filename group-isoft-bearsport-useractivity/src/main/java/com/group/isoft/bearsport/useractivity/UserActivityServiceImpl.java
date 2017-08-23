@@ -1,19 +1,16 @@
 package com.group.isoft.bearsport.useractivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.group.isoft.bearsport.clientmodel.userActivity.ActivityJoiner;
-import com.group.isoft.bearsport.clientmodel.userActivity.ActivityJoinerDetl;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityReqModel;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespData;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespModel;
-import com.group.isoft.bearsport.model.useractivity.ActivityJoinerInfo;
-import com.group.isoft.bearsport.model.useractivity.Joiner;
 import com.group.isoft.bearsport.model.useractivity.UserActivity;
 import com.group.isoft.bearsport.persist.userActivity.UserActivityMapper;
 import com.group.isoft.bearsport.util.ErrorCode;
@@ -28,11 +25,12 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
 		UserActivity userActivity = new UserActivity();
 
+		Date joinDate = new Date();
 		userActivity.setActId(userActivityReqModel.getActId());
 		userActivity.setDetail(userActivityReqModel.getJoinRemark());
-		userActivity.setJoinDate(userActivityReqModel.getJoinDate());
+		userActivity.setJoinDate(joinDate);
 		userActivity.setJoinerName(userActivityReqModel.getJoinerName());
-		userActivity.setJoinTime(userActivityReqModel.getJoinTime());
+		userActivity.setJoinTime(joinDate.getHours() + ":" + joinDate.getMinutes());
 		userActivity.setJoinerType(userActivityReqModel.getJoinerType());
 		userActivity.setStatus(1);
 		userActivity.setUserId(userActivityReqModel.getUserId());
@@ -43,6 +41,10 @@ public class UserActivityServiceImpl implements IUserActivityService {
 
 		if (null != userActivityMapper.fetchUserActivityByUidAndActId(userActivity.getActId(), userActivity.getUserId())) {
 			userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+			List<String> errorCodeList = new ArrayList<String>();
+
+			errorCodeList.add(ErrorCode.ACT_HAVE_JOINED);
+			userActivityRespModel.setErrorCode(errorCodeList);
 		} else {
 			if (userActivityMapper.addUserActivity(userActivity)) {
 				userActivityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
