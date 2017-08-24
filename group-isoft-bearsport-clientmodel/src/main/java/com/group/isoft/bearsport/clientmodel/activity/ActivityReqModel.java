@@ -23,6 +23,7 @@ public class ActivityReqModel extends BaseClientReqModel {
 	private String nickName;
 	private String contactNum;
 	private int enrPeople;
+	private String userId;
 
 	public String getActSubject() {
 		return actSubject;
@@ -110,6 +111,12 @@ public class ActivityReqModel extends BaseClientReqModel {
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public int getEnrPeople() {
 		return enrPeople;
