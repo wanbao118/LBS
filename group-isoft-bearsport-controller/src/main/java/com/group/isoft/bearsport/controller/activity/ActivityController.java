@@ -67,7 +67,6 @@ public class ActivityController {
 			userActivityReqModel.setJoinTime(new Date().getHours() + ":" + new Date().getMinutes());
 			userActivityReqModel.setJoinerType("0");
 			userActivityReqModel.setJoinRemark(activityRequest.getWordInput());
-			userActivityReqModel.setJoinRemark(activityRequest.getWordInput());
 			userActivityRespModel = userActivityService.addUserActivity(userActivityReqModel);
 
 			if (userActivityRespModel.getResult().equalsIgnoreCase(ErrorCode.RESPONSE_ERROR)) {
