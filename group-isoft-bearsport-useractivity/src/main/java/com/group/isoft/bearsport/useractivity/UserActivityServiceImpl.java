@@ -23,6 +23,7 @@ public class UserActivityServiceImpl implements IUserActivityService {
 
 	public UserActivityRespModel addUserActivity(UserActivityReqModel userActivityReqModel) throws Exception {
 		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
+
 		UserActivity userActivity = new UserActivity();
 
 		Date joinDate = new Date();
