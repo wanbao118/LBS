@@ -26,6 +26,7 @@ public class Activity {
 	private String actSubject;
 	private String nickName;
 	private String contactNum;
+	private int enrPeople;
 
 	public String getId() {
 		return id;
@@ -164,6 +165,12 @@ public class Activity {
 	}
 	public void setWordInput(String wordInput) {
 		this.wordInput = wordInput;
+	}
+	public int getEnrPeople() {
+		return enrPeople;
+	}
+	public void setEnrPeople(int enrPeople) {
+		this.enrPeople = enrPeople;
 	}
 	
 }

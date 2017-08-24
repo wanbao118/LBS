@@ -44,6 +44,8 @@
 			javaType="String" />
 		<result property="contactNum" column="CONTACT_NUM"
 			javaType="String" />
+		<result property="enrPeople" column="ENR_PEOPLE"
+			javaType="int" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		ID AS id, ACT_ID AS actId, ACT_TYPE AS actType,
@@ -53,22 +55,25 @@
 		CREATE_DATE as createDate, ACT_STATUS as actStatus,
 		FEE as fee, AREA_NAME as areaName, AREA_ADDRESS as areaAddress,
 		AREA_LATITUDE as areaLatitude, AREA_LONGITUDE as areaLongitude,
-		WORD_INPUT as wordInput, ACT_SUBJECT as actSubject, NICK_NAME as nickName, CONTACT_NUM as contactNum
+		WORD_INPUT as wordInput, ACT_SUBJECT as actSubject, NICK_NAME as nickName, CONTACT_NUM as contactNum,
+		ENR_PEOPLE as enrPeople
 	</sql>
 
 	<insert id="addActivity" parameterType="com.group.isoft.bearsport.model.activity.Activity">
 		insert into t_activity
-		(ID,ACT_ID,ACT_TYPE,FEE_TYPE,PLAN_PEOPLE,SPR_TYPE,ACT_DATE,ACT_TIME,USER_ID,OPEN_ID,HEAT,CREATE_DATE,ACT_STATUS,FEE,AREA_NAME,AREA_ADDRESS,AREA_LATITUDE,AREA_LONGITUDE,WORD_INPUT,ACT_SUBJECT,NICK_NAME,CONTACT_NUM)
+		(ID,ACT_ID,ACT_TYPE,FEE_TYPE,PLAN_PEOPLE,SPR_TYPE,ACT_DATE,ACT_TIME,USER_ID,OPEN_ID,HEAT,CREATE_DATE,ACT_STATUS,FEE,AREA_NAME,AREA_ADDRESS,AREA_LATITUDE,AREA_LONGITUDE,WORD_INPUT,ACT_SUBJECT,NICK_NAME,CONTACT_NUM,ENR_PEOPLE)
 		values
 		(#{id},#{actId},#{actType},#{feeType},#{planPeople},#{sportType},#{actDate},#{actTime},#{userId},#{openId},#{heat},#{createDate},#{actStatus},#{fee},#{areaName},#{areaAddress},#{areaLatitude},#{areaLongitude},#{wordInput},#{actSubject},
-		#{nickName}, #{contactNum})
+		#{nickName}, #{contactNum}, #{enrPeople})
 	</insert>
-		<select id="queryActivityList"
+
+	<select id="queryActivityList"
 		resultType="com.group.isoft.bearsport.model.activity.Activity">
 		select
 		<include refid="Base_Column_List" />
 		from t_activity
 	</select>
+
 	<select id="fetchMaxActId" resultType="String">
 		select MAX(ACT_ID) as ACT_ID from t_activity
 	</select>
@@ -78,4 +83,10 @@
 		<include refid="Base_Column_List" />
 		from t_activity where ACT_ID = #{actId}
 	</select>
+
+	<update id="updateActivity" parameterType="com.group.isoft.bearsport.model.activity.Activity">
+		update t_activity SET
+		ENR_PEOPLE = #{enrPeople}
+		where ACT_ID = #{actId}
+	</update>
 </mapper>

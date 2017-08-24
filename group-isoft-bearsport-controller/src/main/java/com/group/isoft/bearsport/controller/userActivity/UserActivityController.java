@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
+import com.group.isoft.bearsport.activity.IActivityService;
+import com.group.isoft.bearsport.clientmodel.activity.ActivityReqModel;
+import com.group.isoft.bearsport.clientmodel.activity.ActivityRespModel;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityReqModel;
 import com.group.isoft.bearsport.clientmodel.userActivity.UserActivityRespModel;
 import com.group.isoft.bearsport.useractivity.IUserActivityService;
+import com.group.isoft.bearsport.util.ErrorCode;
 import com.group.isoft.bearsport.util.OperationCode;
 
 @Controller
@@ -24,6 +27,8 @@ public class UserActivityController {
 
 	@Resource
 	IUserActivityService userActivityService;
+	@Resource
+	IActivityService activityService;
 
 	@RequestMapping(value = "/userActivityMaintain", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
@@ -47,9 +52,20 @@ public class UserActivityController {
 		UserActivityRespModel userActivityRespModel = getJoinerListbyAcctId(userActivityRequest);
 		return userActivityRespModel;
 	}
-	
+
 	private UserActivityRespModel applyActivity(UserActivityReqModel userActivityRequest) throws Exception {
-		return userActivityService.addUserActivity(userActivityRequest);
+		ActivityReqModel actReqModel = new ActivityReqModel();
+		ActivityRespModel actRespModel = new ActivityRespModel();
+		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
+
+		actReqModel.setActId(userActivityRequest.getActId());
+		actRespModel = activityService.updateActivity(actReqModel);
+
+		if (actRespModel.getResult().equalsIgnoreCase(ErrorCode.RESPONSE_SUCCESS)) {
+			userActivityRespModel = userActivityService.addUserActivity(userActivityRequest);			
+		}
+
+		return userActivityRespModel;
 	}
 
 	private UserActivityRespModel cancelActivity(UserActivityReqModel userActivityRequest) throws Exception {
