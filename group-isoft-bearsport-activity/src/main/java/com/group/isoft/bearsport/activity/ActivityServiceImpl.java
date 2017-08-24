@@ -80,6 +80,7 @@ public class ActivityServiceImpl implements IActivityService {
 		activity.setWordInput(activityReqModel.getWordInput());
 		activity.setNickName(activityReqModel.getNickName());
 		activity.setContactNum(activityReqModel.getContactNum());
+		activity.setEnrPeople(1);
 
 		if (activityMapper.addActivity(activity)) {
 			Map<String, String> paramMap = new HashMap<String, String>();
@@ -112,7 +113,7 @@ public class ActivityServiceImpl implements IActivityService {
 			areaLocation.setLongitude(activity.getArealongitude());
 			activityRespData.setAreaLocation(areaLocation);
 			activityRespData.setAreaName(activity.getAreaName());
-			activityRespData.setEnrPeople(1);
+			activityRespData.setEnrPeople(activity.getEnrPeople());
 			activityRespData.setFeeEst(activity.getFee());
 			activityRespData.setFeeType(activity.getFeeType());
 			activityRespData.setOpenId(activity.getOpenId());
@@ -149,7 +150,7 @@ public class ActivityServiceImpl implements IActivityService {
 			areaLocation.setLongitude(activity.getArealongitude());
 			activityRespData.setAreaLocation(areaLocation);
 			activityRespData.setAreaName(activity.getAreaName());
-			activityRespData.setEnrPeople(2);
+			activityRespData.setEnrPeople(activity.getEnrPeople());
 			activityRespData.setFeeEst(activity.getFee());
 			activityRespData.setFeeType(activity.getFeeType());
 			activityRespData.setOpenId(activity.getOpenId());
@@ -163,6 +164,23 @@ public class ActivityServiceImpl implements IActivityService {
 		}
 
 		activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		return activityRespModel;
+	}
+
+	public ActivityRespModel updateActivity(ActivityReqModel activityReqModel) throws Exception {
+		ActivityRespModel activityRespModel = new ActivityRespModel();
+		Activity activity = null;
+
+		activity = activityMapper.fetchActDetlByActId(activityReqModel.getActId());
+
+		if (null != activity) {
+			activity.setEnrPeople(activity.getEnrPeople() + 1);
+			int record = activityMapper.updateActivity(activity);
+
+			if (record > 0) {
+				activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+			}
+		}
 		return activityRespModel;
 	}
 
