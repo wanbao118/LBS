@@ -19,6 +19,7 @@ public class ActivityRespData {
 	private String wordsInput;
 	private String openId;
 	private String actId;
+	private String nickName;
 	private int enrPeople;
 
 	public String getActSubject() {
@@ -110,6 +111,12 @@ public class ActivityRespData {
 	}
 	public void setEnrPeople(int enrPeople) {
 		this.enrPeople = enrPeople;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 }
