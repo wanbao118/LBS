@@ -74,7 +74,7 @@ public class ActivityServiceImpl implements IActivityService {
 		activity.setFeeType(activityReqModel.getFeeType());
 		activity.setHeat("0");
 		activity.setOpenId(activityReqModel.getOpenId());
-		activity.setUserId("0001");
+		activity.setUserId(activityReqModel.getUserId());
 		activity.setPlanPeople(activityReqModel.getPlanPeople());
 		activity.setSportType(activityReqModel.getSprType());
 		activity.setWordInput(activityReqModel.getWordInput());
