@@ -59,12 +59,17 @@ public class UserActivityController {
 		UserActivityRespModel userActivityRespModel = new UserActivityRespModel();
 
 		actReqModel.setActId(userActivityRequest.getActId());
-		actRespModel = activityService.updateActivity(actReqModel);
 
-		if (actRespModel.getResult().equalsIgnoreCase(ErrorCode.RESPONSE_SUCCESS)) {
-			userActivityRespModel = userActivityService.addUserActivity(userActivityRequest);			
+		userActivityRespModel = userActivityService.addUserActivity(userActivityRequest);			
+
+		if (userActivityRespModel.getResult().equalsIgnoreCase(ErrorCode.RESPONSE_SUCCESS)) {
+			actRespModel = activityService.updateActivity(actReqModel);			
 		}
 
+		if (actRespModel.getResult().equalsIgnoreCase(ErrorCode.RESPONSE_ERROR)) {
+			//回滚
+			userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+		}
 		return userActivityRespModel;
 	}
 
