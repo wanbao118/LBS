@@ -119,6 +119,7 @@ public class ActivityServiceImpl implements IActivityService {
 			activityRespData.setPlanPeople(activity.getPlanPeople());
 			activityRespData.setSprType(activity.getSportType());
 			activityRespData.setWordsInput(activity.getWordInput());
+			activityRespData.setNickName(activity.getNickName());
 
 			activityRespDataList.add(activityRespData);
 		}
@@ -155,6 +156,7 @@ public class ActivityServiceImpl implements IActivityService {
 			activityRespData.setPlanPeople(activity.getPlanPeople());
 			activityRespData.setSprType(activity.getSportType());
 			activityRespData.setWordsInput(activity.getWordInput());
+			activityRespData.setNickName(activity.getNickName());
 
 			activityRespDataList.add(activityRespData);
 			activityRespModel.setListData(activityRespDataList);
