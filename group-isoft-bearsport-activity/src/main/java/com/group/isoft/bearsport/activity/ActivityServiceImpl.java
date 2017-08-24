@@ -179,6 +179,8 @@ public class ActivityServiceImpl implements IActivityService {
 
 			if (record > 0) {
 				activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+			} else {
+				activityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 			}
 		}
 		return activityRespModel;
