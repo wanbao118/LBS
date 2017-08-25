@@ -45,6 +45,8 @@ public class ActivityController {
 			activityRespModel = getActivityList(activityRequest);
 		} else if (activityRequest.getOperationCode().equals(OperationCode.ACT_FETCH_DETL)) {
 			activityRespModel = getActivityDetail(activityRequest);
+		} else if (activityRequest.getOperationCode().equals(OperationCode.ACT_FETCH_OPENID)) {
+			activityRespModel = getActivityListByOpenId(activityRequest);
 		}
 		return activityRespModel;
 	}
@@ -79,6 +81,10 @@ public class ActivityController {
 
 	private ActivityRespModel getActivityList(@RequestBody ActivityReqModel activityRequest) throws Exception {
 		return activityService.fetchActivity(activityRequest);
+	}
+
+	private ActivityRespModel getActivityListByOpenId(@RequestBody ActivityReqModel activityRequest) throws Exception {
+		return activityService.fetchActivityListByOpenId(activityRequest);
 	}
 
 	private ActivityRespModel getActivityDetail(@RequestBody ActivityReqModel activityRequest) throws Exception {
