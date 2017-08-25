@@ -186,4 +186,43 @@ public class ActivityServiceImpl implements IActivityService {
 		return activityRespModel;
 	}
 
+	public ActivityRespModel fetchActivityListByOpenId(ActivityReqModel activityReqModel) throws Exception {
+		ActivityRespModel activityRespModel = new ActivityRespModel();
+		List<Activity> activityList = new ArrayList<Activity>();
+		List<ActivityRespData> activityRespDataList = new ArrayList<ActivityRespData>();
+		activityList = activityMapper.queryActivityListByOpenId(activityReqModel.getOpenId());
+
+		if (activityList.size() > 0) {
+			for (Activity activity : activityList) {
+				ActivityRespData activityRespData = new ActivityRespData();
+				activityRespData.setActId(activity.getActId());
+				activityRespData.setActDate(activity.getActDate());
+				activityRespData.setActSubject(activity.getActSubject());
+				activityRespData.setActTime(activity.getActTime());
+				activityRespData.setActType(activity.getActType());
+				activityRespData.setAreaAddress(activity.getAreaAddress());
+				Location areaLocation = new Location();
+				areaLocation.setLatitude(activity.getAreaLatitude());
+				areaLocation.setLongitude(activity.getArealongitude());
+				activityRespData.setAreaLocation(areaLocation);
+				activityRespData.setAreaName(activity.getAreaName());
+				activityRespData.setEnrPeople(activity.getEnrPeople());
+				activityRespData.setFeeEst(activity.getFee());
+				activityRespData.setFeeType(activity.getFeeType());
+				activityRespData.setOpenId(activity.getOpenId());
+				activityRespData.setPlanPeople(activity.getPlanPeople());
+				activityRespData.setSprType(activity.getSportType());
+				activityRespData.setWordsInput(activity.getWordInput());
+				activityRespData.setNickName(activity.getNickName());
+
+				activityRespDataList.add(activityRespData);
+			}
+			
+		}
+
+		activityRespModel.setListData(activityRespDataList);
+		activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		return activityRespModel;
+	}
+
 }
