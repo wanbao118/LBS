@@ -111,5 +111,4 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		return respModel;
 	}
 
-	
 }
