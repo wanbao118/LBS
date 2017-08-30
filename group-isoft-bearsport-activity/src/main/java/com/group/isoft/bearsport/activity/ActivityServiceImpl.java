@@ -85,7 +85,7 @@ public class ActivityServiceImpl implements IActivityService {
 		if (activityMapper.addActivity(activity)) {
 			Map<String, String> paramMap = new HashMap<String, String>();
 			paramMap.put("actId", activity.getActId());
-			paramMap.put("userId", activity.getUserId());
+			paramMap.put("openId", activity.getOpenId());
 			activityRespModel.setParams(paramMap);
 			activityRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
 		} else {
