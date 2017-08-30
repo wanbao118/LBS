@@ -1,7 +1,5 @@
 package com.group.isoft.bearsport.controller.activity;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,6 +45,8 @@ public class ActivityController {
 			activityRespModel = getActivityDetail(activityRequest);
 		} else if (activityRequest.getOperationCode().equals(OperationCode.ACT_FETCH_OPENID)) {
 			activityRespModel = getActivityListByOpenId(activityRequest);
+		} else if (activityRequest.getOperationCode().equals(OperationCode.JOINED_ACT_OPENID)) {
+			activityRespModel = getJoinedActiityByOpenId(activityRequest);
 		}
 		return activityRespModel;
 	}
@@ -60,13 +60,10 @@ public class ActivityController {
 
 		if (activityRespModel.getResult().equalsIgnoreCase(ErrorCode.RESPONSE_SUCCESS)) {
 			userActivityReqModel.setActId(activityRespModel.getParams().get("actId"));
-			userActivityReqModel.setUserId(activityRespModel.getParams().get("userId"));
-
-			userActivityReqModel.setJoinDate(new Date());
+			userActivityReqModel.setOpenId(activityRespModel.getParams().get("openId"));
 
 			//add field in the DB and pass from FE
 			userActivityReqModel.setJoinerName(activityRequest.getNickName());
-			userActivityReqModel.setJoinTime(new Date().getHours() + ":" + new Date().getMinutes());
 			userActivityReqModel.setJoinerType("0");
 			userActivityReqModel.setJoinRemark(activityRequest.getWordInput());
 			userActivityRespModel = userActivityService.addUserActivity(userActivityReqModel);
@@ -89,6 +86,10 @@ public class ActivityController {
 
 	private ActivityRespModel getActivityDetail(@RequestBody ActivityReqModel activityRequest) throws Exception {
 		return activityService.fetchActivityDetl(activityRequest);
+	}
+
+	private ActivityRespModel getJoinedActiityByOpenId(ActivityReqModel activityRequest) {
+		return null;
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserActivity {
 	private String actId;
-	private String userId;
+	private String openId;
 	private String joinerName;
 	private String joinerType;
 	private Date joinDate;
@@ -22,12 +22,7 @@ public class UserActivity {
 	public void setActId(String actId) {
 		this.actId = actId;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+
 	public String getJoinerName() {
 		return joinerName;
 	}
@@ -87,6 +82,12 @@ public class UserActivity {
 	}
 	public void setCancelRemark(String cancelRemark) {
 		this.cancelRemark = cancelRemark;
+	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 	
 }

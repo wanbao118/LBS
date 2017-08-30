@@ -34,13 +34,14 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		userActivity.setJoinTime(joinDate.getHours() + ":" + joinDate.getMinutes());
 		userActivity.setJoinerType(userActivityReqModel.getJoinerType());
 		userActivity.setStatus(1);
-		userActivity.setUserId(userActivityReqModel.getUserId());
+		//userActivity.setUserId(userActivityReqModel.getUserId());
+		userActivity.setOpenId(userActivityReqModel.getOpenId());
 		userActivity.setCancelDate(null);
 		userActivity.setCancelTime("");
 		userActivity.setCancelReason("");
 		userActivity.setCancelRemark("");
 
-		if (null != userActivityMapper.fetchUserActivityByUidAndActId(userActivity.getActId(), userActivity.getUserId())) {
+		if (null != userActivityMapper.fetchUserActivityByUidAndActId(userActivity.getActId(), userActivity.getOpenId())) {
 			userActivityRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 			List<String> errorCodeList = new ArrayList<String>();
 
@@ -61,7 +62,7 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		UserActivity userActivity ;
 
 		userActivity = userActivityMapper.fetchUserActivityByUidAndActId(
-				userActivityReqModel.getActId(), userActivityReqModel.getUserId());
+				userActivityReqModel.getActId(), userActivityReqModel.getOpenId());
 		
 		if (null != userActivity) {
 			userActivity.setCancelDate(userActivityReqModel.getCancelDate());
@@ -87,17 +88,9 @@ public class UserActivityServiceImpl implements IUserActivityService {
 		List<UserActivity> userActivityList = userActivityMapper.getUserActivityDetlByActId(userActivityReqModel.getActId());
 
 		List<UserActivityRespData> userActivityRespDataList = new ArrayList<UserActivityRespData>();
-/*				ActivityJoinerDetl detail = new ActivityJoinerDetl();
-		detail.setEnrPeople(info.getJoiners().size());
-		detail.setPlanPeople(info.getPlanPeople());
-		UserActivityRespData userActivityRespData = new UserActivityRespData();
-		
-		ArrayList<Joiner> joiners = (ArrayList<Joiner>) info.getJoiners();
-		List<ActivityJoiner> actJoiners = new ArrayList<ActivityJoiner>();
-*/
+
 		for(UserActivity userActivity : userActivityList) {
 			UserActivityRespData userActivityRespData = new UserActivityRespData();
-			userActivityRespData.setUesrId(userActivity.getUserId());
 			userActivityRespData.setUsername(userActivity.getJoinerName());
 			userActivityRespData.setJoinDate(userActivity.getJoinDate());
 			userActivityRespData.setJoinTime(userActivity.getJoinTime());
