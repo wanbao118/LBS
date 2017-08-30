@@ -15,4 +15,5 @@ public class OperationCode
     public static final String ACTIVITY_APPLY = "ACA";
     public static final String ACTIVITY_CANCEL = "ACC";
     public static final String ACT_FETCH_OPENID = "AFO";
+    public static final String JOINED_ACT_OPENID = "JAO";
 }
