@@ -9,7 +9,7 @@ import com.group.isoft.bearsport.model.useractivity.UserActivity;
 
 public interface UserActivityMapper {
 	Boolean addUserActivity(UserActivity userActivity);
-	UserActivity fetchUserActivityByUidAndActId(@Param("actId")String actId, @Param("userId")String userId);
+	UserActivity fetchUserActivityByUidAndActId(@Param("actId")String actId, @Param("openId")String openId);
 	int updateUserActivity(UserActivity userActivity);
 	ActivityJoinerInfo getActivityJoinersbyAcctId(String actId);
 	List<UserActivity> getUserActivityDetlByActId(String actId);
