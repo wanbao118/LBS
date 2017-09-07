@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -45,7 +47,7 @@ public class UserController {
 
 	@RequestMapping(value = "/Login", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public Object Login(final HttpServletRequest request, final HttpServletResponse response,
+	public Object Login(final HttpServletRequest request, final HttpServletResponse response, HttpSession session,
 			@RequestBody UserReqModel userRequest) {
 
 		UserRespModel userRespModel = new UserRespModel();
@@ -65,13 +67,13 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		session.setAttribute("currentUser", userRespModel);
 		return userRespModel;
 	}
 
 	@RequestMapping(value = "/userMaintain", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public Object userMaintain(final HttpServletRequest request, final HttpServletResponse response,
+	public Object userMaintain(final HttpServletRequest request, final HttpServletResponse response, HttpSession session,
 			@RequestBody UserReqModel userRequest) throws Exception {
 		UserRespModel userRespModel = new UserRespModel();
 
@@ -84,7 +86,7 @@ public class UserController {
 		} else if (userRequest.getOperationCode().equals(OperationCode.USER_UPDATE)) {
 			userRespModel = updateUserInfo(userRequest);
 		}
-
+		session.setAttribute("currentUser", userRespModel);
 		return userRespModel;
 	}
 
