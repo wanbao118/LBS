@@ -19,4 +19,8 @@ public interface UserMapper
 
     String fetchMaxUserId();
     
+    boolean addFriend(String openId, String FriendOpenId);
+    
+    List<User> fetchFriendList(String openId);
+    
 }

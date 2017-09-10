@@ -8,4 +8,6 @@ public interface IUserService {
     UserRespModel fetchUserList(UserReqModel userReqModel) throws Exception;
     UserRespModel fetchUserByOpenId(UserReqModel userReqModel) throws Exception;
     UserRespModel updateUser(UserReqModel userReqModel) throws Exception;
+    UserRespModel FetchFriendList(UserReqModel userReqModel) throws Exception;
+    boolean makeFriends(String openId, String friendOpenId) throws Exception;
 }
