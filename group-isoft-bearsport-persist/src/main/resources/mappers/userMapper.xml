@@ -91,4 +91,14 @@
 		select MAX(USER_ID) as USER_ID from t_user
 	</select>
 	
+	<insert id="addFriend" parameterType="java.lang.String">
+		insert into t_friends (openId, friend_openId) values (#{arg0}, #{arg1})
+	</insert>
+	
+	<select id="fetchFriendList" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">
+		select  
+		<include refid="Base_Column_List" />
+		from t_friends, t_user where OPEN_ID=#{openId}
+	</select>
+	
 </mapper>

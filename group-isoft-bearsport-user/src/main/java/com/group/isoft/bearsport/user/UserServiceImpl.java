@@ -197,4 +197,39 @@ public class UserServiceImpl implements IUserService{
 		}	
 		return userRespModel;
 	}
+
+	public boolean makeFriends(String openId, String friendOpenId) throws Exception {
+		return userMapper.addFriend(openId, friendOpenId);
+	}
+	
+	public UserRespModel FetchFriendList(UserReqModel userReqModel) throws Exception{
+		 List<User> users = userMapper.fetchFriendList(userReqModel.getOpenId());
+		 UserRespModel userRespModel = new UserRespModel();
+		 List<UserRespData> listData = new ArrayList<UserRespData>();
+		 for(User user : users) {
+			 UserRespData userData = new UserRespData();
+			 userData.setAvatarUrl(user.getAvatarUrl());
+			 userData.setCity(user.getCity());
+			 userData.setCountry(user.getCountry());
+			 userData.setCreditLevel(user.getCreditLevel());
+			 userData.setDescription(user.getDescription());
+			 userData.setFavType1(user.getFavType1());
+			 userData.setFavType2(user.getFavType2());
+			 userData.setFavType3(user.getFavType3());
+			 userData.setFirstLoginTime(user.getFirstLoginTime());
+			 userData.setGender(user.getGender());
+			 userData.setId(user.getId());
+			 userData.setLanguage(user.getLanguage());
+			 userData.setLastLoginTime(user.getLastLoginTime());
+			 userData.setLevel(user.getLevel());
+			 userData.setNickName(user.getNickName());
+			 userData.setOpenId(user.getOpenId());
+			 userData.setProvince(user.getProvince());
+			 userData.setUserId(user.getUserId());
+			 listData.add(userData);
+		 }
+		 userRespModel.setListData(listData);
+		 return userRespModel;
+	}
+
 }

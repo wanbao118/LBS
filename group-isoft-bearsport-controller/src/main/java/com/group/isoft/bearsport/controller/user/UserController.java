@@ -67,13 +67,13 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("currentUser", userRespModel);
+		session.setAttribute("currentUserId", userRespModel.getParams().get("openId"));
 		return userRespModel;
 	}
 
 	@RequestMapping(value = "/userMaintain", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public Object userMaintain(final HttpServletRequest request, final HttpServletResponse response, HttpSession session,
+	public Object userMaintain(final HttpServletRequest request, final HttpServletResponse response,
 			@RequestBody UserReqModel userRequest) throws Exception {
 		UserRespModel userRespModel = new UserRespModel();
 
@@ -86,7 +86,6 @@ public class UserController {
 		} else if (userRequest.getOperationCode().equals(OperationCode.USER_UPDATE)) {
 			userRespModel = updateUserInfo(userRequest);
 		}
-		session.setAttribute("currentUser", userRespModel);
 		return userRespModel;
 	}
 
