@@ -24,12 +24,16 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"/>
+	
 	<!-- start SpringMVC annotation -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" /> <!-- JSON Converter -->
+				<ref bean="mappingJacksonHttpMessageConverter" />
+				<ref bean="stringHttpMessageConverter"/> <!-- JSON Converter -->
 			</list>
 		</property>
 	</bean>
