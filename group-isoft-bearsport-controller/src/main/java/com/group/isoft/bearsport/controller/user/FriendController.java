@@ -59,8 +59,11 @@ public class FriendController {
 			UserReqModel userReqModel = new UserReqModel();
 			userReqModel.setOpenId(currentUserId);
 			userRespModel = userService.FetchFriendList(userReqModel);
+			userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
 		} catch (Exception e) {
 			sysLogger.error("failed to get friend list", e);
+			userRespModel = new UserRespModel();
+			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
 		}
 		return userRespModel;
 	}
