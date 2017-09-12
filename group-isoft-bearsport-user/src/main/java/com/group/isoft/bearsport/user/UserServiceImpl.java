@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.group.isoft.bearsport.clientmodel.location.Location;
 import com.group.isoft.bearsport.clientmodel.user.UserReqModel;
 import com.group.isoft.bearsport.clientmodel.user.UserRespData;
 import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
@@ -226,6 +227,10 @@ public class UserServiceImpl implements IUserService{
 			 userData.setOpenId(user.getOpenId());
 			 userData.setProvince(user.getProvince());
 			 userData.setUserId(user.getUserId());
+			 Location location = new Location();
+			 location.setLatitude(user.getLatitude());
+			 location.setLongitude(user.getLongitude());
+			 userData.setLocation(location);
 			 listData.add(userData);
 		 }
 		 userRespModel.setListData(listData);
