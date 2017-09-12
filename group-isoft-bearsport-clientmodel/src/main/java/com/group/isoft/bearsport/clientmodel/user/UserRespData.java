@@ -2,6 +2,8 @@ package com.group.isoft.bearsport.clientmodel.user;
 
 import java.sql.Timestamp;
 
+import com.group.isoft.bearsport.clientmodel.location.Location;
+
 public class UserRespData {
 	private String id;
 	private String userId;
@@ -21,6 +23,7 @@ public class UserRespData {
 	private Timestamp firstLoginTime;
 	private Timestamp lastLoginTime;
 	private String openId;
+	private Location location;
 
 	public String getNickName() {
 		return nickName;
@@ -129,6 +132,12 @@ public class UserRespData {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 }
