@@ -23,4 +23,8 @@ public interface UserMapper
     
     List<User> fetchFriendList(String openId);
     
+    int updateRelationshipStatus(String openId, String friendOpenId, String relationshipStatus);
+    
+    List<User> fetchMakeFriendApplications(String openId);
+    
 }

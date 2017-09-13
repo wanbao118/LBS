@@ -67,4 +67,38 @@ public class FriendController {
 		}
 		return userRespModel;
 	}
+	
+	@RequestMapping(value="/friendRequestApproval", method=RequestMethod.POST, consumes="application/json", produces="application/json")
+	@ResponseBody
+	public Object approveFriendRequest(final HttpServletRequest request, final HttpServletResponse response, HttpSession session, @RequestBody UserReqModel userReqModel) {
+		UserRespModel userRespModel = null;
+		try {
+			String currentUserId = (String) session.getAttribute("currentUserId");
+			userReqModel.getParams().put("openId", currentUserId);
+			userRespModel = userService.updateRelationshipStatus(userReqModel);
+		} catch (Exception e) {
+			sysLogger.error("failed to approve friend request", e);
+			userRespModel = new UserRespModel();
+			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+		}
+		return userRespModel;
+	}
+	
+	@RequestMapping(value="/friendRequests", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public Object getFriendRequestList(final HttpServletRequest request, final HttpServletResponse response, HttpSession session) {
+		UserRespModel userRespModel = null;
+		try {
+			String currentUserId = (String) session.getAttribute("currentUserId");
+			UserReqModel userReqModel = new UserReqModel();
+			userReqModel.getParams().put("openId", currentUserId);
+			userRespModel = userService.fetchMakeFriendApplications(userReqModel);
+			userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		} catch (Exception e) {
+			sysLogger.error("failed to get friend request list", e);
+			userRespModel = new UserRespModel();
+			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+		}
+		return userRespModel;
+	}
 }
