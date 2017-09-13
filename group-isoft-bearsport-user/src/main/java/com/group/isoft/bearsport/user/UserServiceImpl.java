@@ -130,6 +130,10 @@ public class UserServiceImpl implements IUserService{
 			userRespData.setOpenId(user.getOpenId());
 			userRespData.setProvince(user.getProvince());
 			userRespData.setUserId(user.getUserId());
+			Location location = new Location();
+			location.setLatitude(user.getLatitude());
+			location.setLongitude(user.getLatitude());
+			userRespData.setLocation(location);
 			userDataList.add(userRespData);
 
 			userResponseModel.setResult(ErrorCode.RESPONSE_SUCCESS);
@@ -165,6 +169,10 @@ public class UserServiceImpl implements IUserService{
 			userRespData.setOpenId(user.getOpenId());
 			userRespData.setProvince(user.getProvince());
 			userRespData.setUserId(user.getUserId());
+			Location location = new Location();
+			location.setLatitude(user.getLatitude());
+			location.setLongitude(user.getLatitude());
+			userRespData.setLocation(location);
 
 			userRespDataList.add(userRespData);
 		}
@@ -236,5 +244,5 @@ public class UserServiceImpl implements IUserService{
 		 userRespModel.setListData(listData);
 		 return userRespModel;
 	}
-
+	
 }
