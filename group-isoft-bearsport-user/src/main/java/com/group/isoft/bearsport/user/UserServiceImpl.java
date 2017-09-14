@@ -245,4 +245,52 @@ public class UserServiceImpl implements IUserService{
 		 return userRespModel;
 	}
 	
+	public UserRespModel updateRelationshipStatus(UserReqModel userReqModel) throws Exception{
+		String openId = userReqModel.getParams().get("openId");
+		String friendOpenId = userReqModel.getParams().get("friendOpenId");
+		String relationshipStatus = userReqModel.getParams().get("relationshipStatus");
+		int recordNum = userMapper.updateRelationshipStatus(openId, friendOpenId, relationshipStatus);
+		UserRespModel userRespModel = new UserRespModel();
+		if(recordNum > 0) {
+			userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
+		}else {
+			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
+		}
+		return userRespModel;
+	}
+	
+	public UserRespModel fetchMakeFriendApplications(UserReqModel userReqModel) throws Exception{
+		String openId = userReqModel.getParams().get("openId");
+		List<User> users = userMapper.fetchMakeFriendApplications(openId);
+		UserRespModel userRespModel = new UserRespModel();
+		List<UserRespData> listData = new ArrayList<UserRespData>();
+		for(User user : users) {
+			UserRespData userData = new UserRespData();
+			 userData.setAvatarUrl(user.getAvatarUrl());
+			 userData.setCity(user.getCity());
+			 userData.setCountry(user.getCountry());
+			 userData.setCreditLevel(user.getCreditLevel());
+			 userData.setDescription(user.getDescription());
+			 userData.setFavType1(user.getFavType1());
+			 userData.setFavType2(user.getFavType2());
+			 userData.setFavType3(user.getFavType3());
+			 userData.setFirstLoginTime(user.getFirstLoginTime());
+			 userData.setGender(user.getGender());
+			 userData.setId(user.getId());
+			 userData.setLanguage(user.getLanguage());
+			 userData.setLastLoginTime(user.getLastLoginTime());
+			 userData.setLevel(user.getLevel());
+			 userData.setNickName(user.getNickName());
+			 userData.setOpenId(user.getOpenId());
+			 userData.setProvince(user.getProvince());
+			 userData.setUserId(user.getUserId());
+			 Location location = new Location();
+			 location.setLatitude(user.getLatitude());
+			 location.setLongitude(user.getLongitude());
+			 userData.setLocation(location);
+			 listData.add(userData);
+		}
+		userRespModel.setListData(listData);
+		 return userRespModel;
+	}
 }

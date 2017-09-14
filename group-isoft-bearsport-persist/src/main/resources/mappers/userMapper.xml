@@ -92,8 +92,24 @@
 	</select>
 	
 	<insert id="addFriend" parameterType="java.lang.String">
-		insert into t_friends (openId, friend_openId) values (#{arg0}, #{arg1})
+		insert into t_friends (openId, friend_openId, relationship_status) values (#{arg0}, #{arg1}, '0')
 	</insert>
+	
+	<update id="updateRelationshipStatus" parameterType="java.lang.String">
+		update t_friends SET relationship_status=#{arg2} where (openId=#{arg0} and friend_openId=#{arg1}) or (friend_openId=#{arg0} and openId=#{arg1}) 
+	</update>
+	
+	<select id="fetchMakeFriendApplications" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">
+		select t_user.ID AS id, t_user.USER_ID AS userId, t_user.NICK_NAME AS nickName,
+		t_user.GENDER AS gender, t_user.LANGUAGE AS language,
+		t_user.CITY AS city, t_user.PROVINCE AS province,
+		t_user.COUNTRY AS country, t_user.AVATAR_URL AS avatarUrl,
+		t_user.DESCRIPTION as description, t_user.LEVEL as level,
+		t_user.CREDIT_LEVEL as creditLevel, t_user.FAVTYPE1 as favType1,
+		t_user.FAVTYPE2 as favType2,t_user.FAVTYPE3 as favType3,
+		t_user.FIRST_LOGIN_TIME as firstLoginTime, t_user.LAST_LOGIN_TIME as lastLoginTime,
+		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select friend_openId as id from t_friends where openId=#{openId} and relationship_status='0') a inner join t_user on a.id = t_user.OPEN_ID
+	</select>
 	
 	<select id="fetchFriendList" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">
 		select t_user.ID AS id, t_user.USER_ID AS userId, t_user.NICK_NAME AS nickName,
@@ -104,7 +120,7 @@
 		t_user.CREDIT_LEVEL as creditLevel, t_user.FAVTYPE1 as favType1,
 		t_user.FAVTYPE2 as favType2,t_user.FAVTYPE3 as favType3,
 		t_user.FIRST_LOGIN_TIME as firstLoginTime, t_user.LAST_LOGIN_TIME as lastLoginTime,
-		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select friend_openId as id from t_friends where openId=#{openId}) a inner join t_user on a.id = t_user.OPEN_ID
+		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select friend_openId as id from t_friends where openId=#{openId} and relationship_status='1') a inner join t_user on a.id = t_user.OPEN_ID
 union
 select t_user.ID AS id, t_user.USER_ID AS userId, t_user.NICK_NAME AS nickName,
 		t_user.GENDER AS gender, t_user.LANGUAGE AS language,
@@ -114,7 +130,7 @@ select t_user.ID AS id, t_user.USER_ID AS userId, t_user.NICK_NAME AS nickName,
 		t_user.CREDIT_LEVEL as creditLevel, t_user.FAVTYPE1 as favType1,
 		t_user.FAVTYPE2 as favType2,t_user.FAVTYPE3 as favType3,
 		t_user.FIRST_LOGIN_TIME as firstLoginTime, t_user.LAST_LOGIN_TIME as lastLoginTime,
-		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select openId as id from t_friends where friend_openId=#{openId}) b inner join t_user on b.id = t_user.OPEN_ID;
+		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select openId as id from t_friends where friend_openId=#{openId} and relationship_status='1') b inner join t_user on b.id = t_user.OPEN_ID;
 
 	</select>
 	
