@@ -84,7 +84,7 @@ public class FriendController {
 		return userRespModel;
 	}
 	
-	@RequestMapping(value="/friendRequests", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/friendRequestList", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public Object getFriendRequestList(final HttpServletRequest request, final HttpServletResponse response, HttpSession session) {
 		UserRespModel userRespModel = null;
