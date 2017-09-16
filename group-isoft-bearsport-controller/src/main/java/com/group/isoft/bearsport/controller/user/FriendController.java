@@ -72,8 +72,6 @@ public class FriendController {
 	public Object approveFriendRequest(final HttpServletRequest request, final HttpServletResponse response, @RequestBody UserReqModel userReqModel) {
 		UserRespModel userRespModel = null;
 		try {
-			String currentUserId = userReqModel.getParams().get("openId");
-			userReqModel.getParams().put("openId", currentUserId);
 			userRespModel = userService.updateRelationshipStatus(userReqModel);
 		} catch (Exception e) {
 			sysLogger.error("failed to approve friend request", e);
