@@ -171,7 +171,7 @@ public class UserServiceImpl implements IUserService{
 			userRespData.setUserId(user.getUserId());
 			Location location = new Location();
 			location.setLatitude(user.getLatitude());
-			location.setLongitude(user.getLatitude());
+			location.setLongitude(user.getLongitude());
 			userRespData.setLocation(location);
 
 			userRespDataList.add(userRespData);
