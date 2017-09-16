@@ -6,13 +6,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group.isoft.bearsport.clientmodel.user.UserReqModel;
@@ -30,8 +30,8 @@ public class FriendController {
 	
 	@RequestMapping(value = "/makeFriend", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
-	public Object makeFriends(final HttpServletRequest request, final HttpServletResponse response, @RequestBody UserReqModel userReqModel, HttpSession session) {
-		String openId = (String)session.getAttribute("currentUserId");
+	public Object makeFriends(final HttpServletRequest request, final HttpServletResponse response, @RequestBody UserReqModel userReqModel) {
+		String openId = userReqModel.getParams().get("openId");
 		String friendOpenId = userReqModel.getParams().get("friendOpenId");
 		boolean success = false;
 		try {
@@ -52,10 +52,9 @@ public class FriendController {
 	
 	@RequestMapping(value = "/friends", method=RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public Object getFriendList(final HttpServletRequest request, final HttpServletResponse response, HttpSession session) {
+	public Object getFriendList(@RequestParam String currentUserId, final HttpServletRequest request, final HttpServletResponse response) {
 		UserRespModel userRespModel = null;
 		try {
-			String currentUserId = (String) session.getAttribute("currentUserId");
 			UserReqModel userReqModel = new UserReqModel();
 			userReqModel.setOpenId(currentUserId);
 			userRespModel = userService.FetchFriendList(userReqModel);
@@ -70,11 +69,9 @@ public class FriendController {
 	
 	@RequestMapping(value="/friendRequestApproval", method=RequestMethod.POST, consumes="application/json", produces="application/json")
 	@ResponseBody
-	public Object approveFriendRequest(final HttpServletRequest request, final HttpServletResponse response, HttpSession session, @RequestBody UserReqModel userReqModel) {
+	public Object approveFriendRequest(final HttpServletRequest request, final HttpServletResponse response, @RequestBody UserReqModel userReqModel) {
 		UserRespModel userRespModel = null;
 		try {
-			String currentUserId = (String) session.getAttribute("currentUserId");
-			userReqModel.getParams().put("openId", currentUserId);
 			userRespModel = userService.updateRelationshipStatus(userReqModel);
 		} catch (Exception e) {
 			sysLogger.error("failed to approve friend request", e);
@@ -86,10 +83,9 @@ public class FriendController {
 	
 	@RequestMapping(value="/friendRequestList", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public Object getFriendRequestList(final HttpServletRequest request, final HttpServletResponse response, HttpSession session) {
+	public Object getFriendRequestList(@RequestParam String currentUserId, final HttpServletRequest request, final HttpServletResponse response) {
 		UserRespModel userRespModel = null;
 		try {
-			String currentUserId = (String) session.getAttribute("currentUserId");
 			UserReqModel userReqModel = new UserReqModel();
 			userReqModel.getParams().put("openId", currentUserId);
 			userRespModel = userService.fetchMakeFriendApplications(userReqModel);
