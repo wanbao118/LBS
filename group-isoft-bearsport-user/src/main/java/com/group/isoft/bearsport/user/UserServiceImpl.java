@@ -37,6 +37,7 @@ public class UserServiceImpl implements IUserService{
 			user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
 			user.setLatitude(userReqModel.getLocation().getLatitude());
 			user.setLongitude(userReqModel.getLocation().getLongitude());
+			user.setLoginCity(userReqModel.getLoginCity());
 
 			int recordNum = userMapper.updateUser(user);
 
