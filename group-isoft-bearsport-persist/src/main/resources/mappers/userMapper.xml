@@ -108,7 +108,7 @@
 		t_user.CREDIT_LEVEL as creditLevel, t_user.FAVTYPE1 as favType1,
 		t_user.FAVTYPE2 as favType2,t_user.FAVTYPE3 as favType3,
 		t_user.FIRST_LOGIN_TIME as firstLoginTime, t_user.LAST_LOGIN_TIME as lastLoginTime,
-		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select friend_openId as id from t_friends where openId=#{openId} and relationship_status='0') a inner join t_user on a.id = t_user.OPEN_ID
+		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select friend_openId as id from t_friends where openId=#{openId}) a inner join t_user on a.id = t_user.OPEN_ID
 	</select>
 	
 	<select id="fetchFriendList" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">
