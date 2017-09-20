@@ -9,7 +9,7 @@ public interface IUserService {
     UserRespModel fetchUserByOpenId(UserReqModel userReqModel) throws Exception;
     UserRespModel updateUser(UserReqModel userReqModel) throws Exception;
     UserRespModel FetchFriendList(UserReqModel userReqModel) throws Exception;
-    boolean makeFriends(String openId, String friendOpenId) throws Exception;
+    boolean makeFriends(UserReqModel userReqModel) throws Exception;
     UserRespModel updateRelationshipStatus(UserReqModel userReqModel) throws Exception;
     UserRespModel fetchMakeFriendApplications(UserReqModel userReqModel) throws Exception;
 }

@@ -44,6 +44,53 @@
 			javaType="String" />
 
 	</resultMap>
+	
+	<resultMap type="com.group.isoft.bearsport.model.user.FriendApplication" id="friendApplicationMap">
+		<result property="relationshipStatus" column="relationshipStatus" javaType="String"/>
+		<result property="validationMessage" column="validationMessage" javaType="String"/>
+		<association property="user" column="id" javaType="com.group.isoft.bearsport.model.user.User">
+			<id property="id" column="id" javaType="String" />
+			<result property="userId" column="userId" javaType="String" />
+			<result property="nickName" column="nickName"
+				javaType="String" />
+			<result property="gender" column="gender"
+				javaType="String" />
+			<result property="language" column="language" javaType="String" />
+			<result property="city" column="city"
+				javaType="String" />
+			<result property="province" column="province"
+				javaType="String" />
+			<result property="country" column="country"
+				javaType="String" />
+			<result property="avatarUrl" column="avatarUrl"
+				javaType="String" />
+			<result property="description" column="description"
+				javaType="String" />
+			<result property="level" column="level"
+				javaType="String" />
+			<result property="creditLevel" column="creditLevel"
+				javaType="String" />
+			<result property="favType1" column="favType1"
+				javaType="String" />
+			<result property="favType2" column="favType2"
+				javaType="String" />
+			<result property="favType3" column="favType3"
+				javaType="String" />
+			<result property="firstLoginTime" column="firstLoginTime"
+				javaType="java.sql.Timestamp" />
+			<result property="lastLoginTime" column="lastLoginTime"
+				javaType="java.sql.Timestamp" />
+			<result property="openId" column="openId"
+				javaType="String" />
+			<result property="latitude" column="latitude"
+				javaType="String" />
+			<result property="longitude" column="longitude"
+				javaType="String" />
+			<result property="loginCity" column="loginCity"
+				javaType="String" />
+		</association>
+	</resultMap>
+	
 	<sql id="Base_Column_List">
 		ID AS id, USER_ID AS userId, NICK_NAME AS nickName,
 		GENDER AS gender, LANGUAGE AS language,
@@ -92,23 +139,26 @@
 	</select>
 	
 	<insert id="addFriend" parameterType="java.lang.String">
-		insert into t_friends (openId, friend_openId, relationship_status) values (#{arg0}, #{arg1}, '0')
+		insert into t_friends (openId, friend_openId, relationship_status, validation_msg) values (#{arg0}, #{arg1}, '0', #{arg2})
 	</insert>
 	
-	<update id="updateRelationshipStatus" parameterType="java.lang.String">
-		update t_friends SET relationship_status=#{arg2} where (openId=#{arg0} and friend_openId=#{arg1}) or (friend_openId=#{arg0} and openId=#{arg1}) 
+	<update id="updateRelationshipStatus" parameterType="com.group.isoft.bearsport.model.user.ApplyFriendRequest">
+		update t_friends SET relationship_status = #{relationshipStatus} where (openId = #{friendOpenId} and friend_openId = #{openId})
 	</update>
 	
-	<select id="fetchMakeFriendApplications" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">
+	<select id="fetchMakeFriendApplications" parameterType="java.lang.String" resultMap="friendApplicationMap">
 		select t_user.ID AS id, t_user.USER_ID AS userId, t_user.NICK_NAME AS nickName,
-		t_user.GENDER AS gender, t_user.LANGUAGE AS language,
-		t_user.CITY AS city, t_user.PROVINCE AS province,
-		t_user.COUNTRY AS country, t_user.AVATAR_URL AS avatarUrl,
-		t_user.DESCRIPTION as description, t_user.LEVEL as level,
-		t_user.CREDIT_LEVEL as creditLevel, t_user.FAVTYPE1 as favType1,
-		t_user.FAVTYPE2 as favType2,t_user.FAVTYPE3 as favType3,
-		t_user.FIRST_LOGIN_TIME as firstLoginTime, t_user.LAST_LOGIN_TIME as lastLoginTime,
-		t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity from (select friend_openId as id from t_friends where openId=#{openId}) a inner join t_user on a.id = t_user.OPEN_ID
+				t_user.GENDER AS gender, t_user.LANGUAGE AS language,
+				t_user.CITY AS city, t_user.PROVINCE AS province,
+				t_user.COUNTRY AS country, t_user.AVATAR_URL AS avatarUrl,
+				t_user.DESCRIPTION as description, t_user.LEVEL as level,
+				t_user.CREDIT_LEVEL as creditLevel, t_user.FAVTYPE1 as favType1,
+				t_user.FAVTYPE2 as favType2, t_user.FAVTYPE3 as favType3,
+				t_user.FIRST_LOGIN_TIME as firstLoginTime, t_user.LAST_LOGIN_TIME as lastLoginTime,
+				t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity, a.validation_msg as validationMessage, a.relationship_status as relationshipStatus 
+		from (select friend_openId as id, validation_msg as validation_msg, openId as openId, relationship_status as relationship_status from t_friends where friend_openId=#{openId}) a 
+		inner join t_user 
+		on (a.id = t_user.OPEN_ID and a.relationship_status = '0')
 	</select>
 	
 	<select id="fetchFriendList" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">

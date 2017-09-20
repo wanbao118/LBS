@@ -12,7 +12,9 @@ public abstract class BaseClientRespModel
     private List<String> errorCode = new ArrayList<String>();
 
     private Map<String, String> params = new HashMap<String, String>();
-
+    
+    private List<?> data;
+    
     public String getResult()
     {
         return result;
@@ -42,5 +44,13 @@ public abstract class BaseClientRespModel
     {
         this.params = params;
     }
+
+	public List<?> getData() {
+		return data;
+	}
+
+	public void setData(List<?> data) {
+		this.data = data;
+	}
 
 }

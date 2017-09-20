@@ -31,11 +31,11 @@ public class FriendController {
 	@RequestMapping(value = "/makeFriend", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public Object makeFriends(final HttpServletRequest request, final HttpServletResponse response, @RequestBody UserReqModel userReqModel) {
-		String openId = userReqModel.getParams().get("openId");
+//		String openId = userReqModel.getParams().get("openId");
 		String friendOpenId = userReqModel.getParams().get("friendOpenId");
 		boolean success = false;
 		try {
-			success = userService.makeFriends(openId, friendOpenId);
+			success = userService.makeFriends(userReqModel);
 		} catch (Exception e) {
 			sysLogger.error("failed to add friend", e);
 		}
