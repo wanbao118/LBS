@@ -13,6 +13,8 @@ import com.group.isoft.bearsport.clientmodel.location.Location;
 import com.group.isoft.bearsport.clientmodel.user.UserReqModel;
 import com.group.isoft.bearsport.clientmodel.user.UserRespData;
 import com.group.isoft.bearsport.clientmodel.user.UserRespModel;
+import com.group.isoft.bearsport.model.user.ApplyFriendRequest;
+import com.group.isoft.bearsport.model.user.FriendApplication;
 import com.group.isoft.bearsport.model.user.User;
 import com.group.isoft.bearsport.persist.user.UserMapper;
 import com.group.isoft.bearsport.util.ErrorCode;
@@ -208,8 +210,11 @@ public class UserServiceImpl implements IUserService{
 		return userRespModel;
 	}
 
-	public boolean makeFriends(String openId, String friendOpenId) throws Exception {
-		return userMapper.addFriend(openId, friendOpenId);
+	public boolean makeFriends(UserReqModel userReqModel) throws Exception {
+		String openId = userReqModel.getParams().get("openId");
+		String friendOpenId = userReqModel.getParams().get("friendOpenId");
+		String validationMessage = userReqModel.getParams().get("validationMessage");
+		return userMapper.addFriend(openId, friendOpenId, validationMessage);
 	}
 	
 	public UserRespModel FetchFriendList(UserReqModel userReqModel) throws Exception{
@@ -250,9 +255,13 @@ public class UserServiceImpl implements IUserService{
 		String openId = userReqModel.getParams().get("openId");
 		String friendOpenId = userReqModel.getParams().get("friendOpenId");
 		String relationshipStatus = userReqModel.getParams().get("relationshipStatus");
-		int recordNum = userMapper.updateRelationshipStatus(openId, friendOpenId, relationshipStatus);
+		ApplyFriendRequest request = new ApplyFriendRequest();
+		request.setFriendOpenId(friendOpenId);
+		request.setOpenId(openId);
+		request.setRelationshipStatus(relationshipStatus);
+		boolean success = userMapper.updateRelationshipStatus(request);
 		UserRespModel userRespModel = new UserRespModel();
-		if(recordNum > 0) {
+		if(success) {
 			userRespModel.setResult(ErrorCode.RESPONSE_SUCCESS);
 		}else {
 			userRespModel.setResult(ErrorCode.RESPONSE_ERROR);
@@ -262,36 +271,9 @@ public class UserServiceImpl implements IUserService{
 	
 	public UserRespModel fetchMakeFriendApplications(UserReqModel userReqModel) throws Exception{
 		String openId = userReqModel.getParams().get("openId");
-		List<User> users = userMapper.fetchMakeFriendApplications(openId);
+		List<FriendApplication> friendApplications = userMapper.fetchMakeFriendApplications(openId);
 		UserRespModel userRespModel = new UserRespModel();
-		List<UserRespData> listData = new ArrayList<UserRespData>();
-		for(User user : users) {
-			UserRespData userData = new UserRespData();
-			 userData.setAvatarUrl(user.getAvatarUrl());
-			 userData.setCity(user.getCity());
-			 userData.setCountry(user.getCountry());
-			 userData.setCreditLevel(user.getCreditLevel());
-			 userData.setDescription(user.getDescription());
-			 userData.setFavType1(user.getFavType1());
-			 userData.setFavType2(user.getFavType2());
-			 userData.setFavType3(user.getFavType3());
-			 userData.setFirstLoginTime(user.getFirstLoginTime());
-			 userData.setGender(user.getGender());
-			 userData.setId(user.getId());
-			 userData.setLanguage(user.getLanguage());
-			 userData.setLastLoginTime(user.getLastLoginTime());
-			 userData.setLevel(user.getLevel());
-			 userData.setNickName(user.getNickName());
-			 userData.setOpenId(user.getOpenId());
-			 userData.setProvince(user.getProvince());
-			 userData.setUserId(user.getUserId());
-			 Location location = new Location();
-			 location.setLatitude(user.getLatitude());
-			 location.setLongitude(user.getLongitude());
-			 userData.setLocation(location);
-			 listData.add(userData);
-		}
-		userRespModel.setListData(listData);
+		userRespModel.setData(friendApplications);
 		 return userRespModel;
 	}
 }

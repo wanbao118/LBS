@@ -2,6 +2,8 @@ package com.group.isoft.bearsport.persist.user;
 
 import java.util.List;
 
+import com.group.isoft.bearsport.model.user.ApplyFriendRequest;
+import com.group.isoft.bearsport.model.user.FriendApplication;
 import com.group.isoft.bearsport.model.user.User;
 
 
@@ -19,12 +21,12 @@ public interface UserMapper
 
     String fetchMaxUserId();
     
-    boolean addFriend(String openId, String FriendOpenId);
+    boolean addFriend(String openId, String FriendOpenId, String validationMessage);
     
     List<User> fetchFriendList(String openId);
     
-    int updateRelationshipStatus(String openId, String friendOpenId, String relationshipStatus);
+    boolean updateRelationshipStatus(ApplyFriendRequest request);
     
-    List<User> fetchMakeFriendApplications(String openId);
+    List<FriendApplication> fetchMakeFriendApplications(String openId);
     
 }
