@@ -158,7 +158,7 @@
 				t_user.OPEN_ID as openId,t_user.LATITUDE as latitude,t_user.LONGTITUDE as longitude,t_user.LOGIN_CITY as loginCity, a.validation_msg as validationMessage, a.relationship_status as relationshipStatus 
 		from (select friend_openId as id, validation_msg as validation_msg, openId as openId, relationship_status as relationship_status from t_friends where friend_openId=#{openId}) a 
 		inner join t_user 
-		on (a.id = t_user.OPEN_ID and a.relationship_status = '0')
+		on (a.openId = t_user.OPEN_ID and a.relationship_status = '0')
 	</select>
 	
 	<select id="fetchFriendList" parameterType="java.lang.String" resultType="com.group.isoft.bearsport.model.user.User">
